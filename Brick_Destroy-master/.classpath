@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="/Users/ziqin/Desktop/DiamondHunterEclipse/Libs/mp3spi1.9.5.jar"/>
 	<classpathentry kind="lib" path="/Users/ziqin/git/COMP2042_CW_hfyzl6/Brick_Destroy-master/lib/jl1.0.1.jar"/>
 	<classpathentry kind="lib" path="/Users/ziqin/git/COMP2042_CW_hfyzl6/Brick_Destroy-master/lib/tritonus_share.jar"/>
+	<classpathentry kind="lib" path="/Users/ziqin/git/COMP2042_CW_hfyzl6/Brick_Destroy-master/lib/commons-lang3-3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

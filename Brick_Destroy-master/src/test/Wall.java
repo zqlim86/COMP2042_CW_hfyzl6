@@ -43,6 +43,7 @@ public class Wall {
     private Point startPoint;
     private int brickCount;
     private int ballCount;
+    private int scoreCount;
     private boolean ballLost;
 
     public Wall(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
@@ -60,12 +61,14 @@ public class Wall {
         makeBall(ballPos);
         int speedX,speedY;
         do{
-            //speedX = rnd.nextInt(5) - 2;
+        	
         	speedX = 3;
+        	
         }while(speedX == 0);
         do{
-            //speedY = -rnd.nextInt(3);
+        	
         	speedY = -3;
+        	
         }while(speedY == 0);
 
         ball.setSpeed(speedX,speedY);
@@ -189,6 +192,8 @@ public class Wall {
             * because for every brick program checks for horizontal and vertical impacts
             */
             brickCount--;
+            scoreCount += 5;
+            
         }
         else if(impactBorder()) {
             ball.reverseX();
@@ -237,7 +242,12 @@ public class Wall {
     public int getBallCount(){
         return ballCount;
     }
-
+    
+    public int getScoreCount() {
+    	return scoreCount;
+    }
+    
+    
     public boolean isBallLost(){
         return ballLost;
     }
@@ -247,10 +257,10 @@ public class Wall {
         ball.moveTo(startPoint);
         int speedX,speedY;
         do{
-            speedX = rnd.nextInt(5) - 2;
+            speedX = 3;
         }while(speedX == 0);
         do{
-            speedY = -rnd.nextInt(3);
+            speedY = -3;
         }while(speedY == 0);
 
         ball.setSpeed(speedX,speedY);

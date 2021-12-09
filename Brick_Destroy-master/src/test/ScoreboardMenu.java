@@ -7,18 +7,18 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.util.*;
+import org.apache.commons.lang3.StringUtils;
 
-public class InstructMenu extends JComponent implements MouseListener, MouseMotionListener{
 
-	    //add details in info page
-	    private static final String BACK_TEXT = "Back";
-	    private static final String INSTRUCTIONS = "HOW TO PLAY:";
-	    private static final String INSTRUCTIONS1 = "Just Break Them Bricks!";
-	    private static final String INSTRUCTIONS2 = "Left/Right = A/D";
-	    private static final String INSTRUCTIONS3 = "Pause = ESC";
-	    private static final String INSTRUCTIONS4 = "Skip Level = ALT+SHIFT+F1";
-	    private Font instructionFont;
-	    private Font instruction2Font;
+
+public class ScoreboardMenu extends JComponent implements MouseListener, MouseMotionListener{
+		
+	 	private static final String BACK_TEXT = "Back";
+	    private static final String TITLE = "LEADERBOARD";
+	    private Font titleFont;
+	    private Font listFont;
 
 	    private static final Color BORDER_COLOR = new Color(200,8,21); //Venetian Red
 	    private static final Color DASH_BORDER_COLOR = new  Color(255, 216, 0);//school bus yellow
@@ -28,7 +28,10 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	    private static final Color CLICKED_TEXT = Color.GRAY.darker();
 	    private static final int BORDER_SIZE = 5;
 	    private static final float[] DASHES = {12,6};
-
+	    
+	    private int printscores = 8;
+	    private String scoreMessage;
+	    private boolean backClicked;
 
 	    private BasicStroke borderStoke;
 	    private BasicStroke borderStoke_noDashes;
@@ -42,13 +45,15 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	    Image icon = new ImageIcon(getClass().getResource("/resources/galaxy2.gif")).getImage();
 
 
-	    private boolean backClicked;
+	    
 
 
-	    public InstructMenu(GameFrame owner, Dimension area){
+	    public ScoreboardMenu(GameFrame owner, Dimension area) throws IOException {
 	    	
 	    	BackgroundMusic.init();
 	    	BackgroundMusic.load("/SFX/ButtonEffect.mp3", "ButtonEffect");
+	    	
+	    	scoreMessage = displayScores();
 	        this.setFocusable(true);
 	        this.requestFocusInWindow();
 
@@ -67,8 +72,8 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	        borderStoke_noDashes = new BasicStroke(BORDER_SIZE,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND);
 	        
 	        buttonFont = new Font("Helvetica Neue",Font.PLAIN,backButton.height-2);
-	        instructionFont = new Font("Helvetica Neue", Font.BOLD, 30);
-	        instruction2Font = new Font("Helvetica Neue", Font.PLAIN, 15);
+	        titleFont = new Font("Helvetica Neue", Font.BOLD, 30);
+	        listFont = new Font("Helvetica Neue", Font.BOLD, 20);
 
 
 	    }
@@ -126,7 +131,10 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	        g2d.setColor(prev);
 	    }
 
-
+	    private void drawString(Graphics g, String text, int x, int y) {
+	        for (String line : text.split("\n"))
+	            g.drawString(line, x, y += g.getFontMetrics().getHeight());
+	    }
 
 	    private void drawText(Graphics2D g2d){
 
@@ -134,43 +142,24 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 
 	        FontRenderContext frc = g2d.getFontRenderContext();
 
-	        Rectangle2D instRect = instructionFont.getStringBounds(INSTRUCTIONS,frc);
-	        Rectangle2D inst1Rect = instructionFont.getStringBounds(INSTRUCTIONS1,frc);
+	        Rectangle2D titleRect = titleFont.getStringBounds(TITLE,frc);
+	        //Rectangle2D listRect = titleFont.getStringBounds(,frc);
 
 	        int sX,sY;
 
 	        sY = (int)(menuFace.getHeight() / 6);
-	        sX = (int)(menuFace.getWidth() - instRect.getWidth()) / 2;
-	        sY += (int) instRect.getHeight() * 1.1;//add 10% of String height between the two strings
-	        
-	        g2d.setFont(instructionFont);
-	        g2d.drawString(INSTRUCTIONS,sX,sY);
+	        sX = (int)(menuFace.getWidth() - titleRect.getWidth()) / 2;
+	        sY += (int) titleRect.getHeight() * 1.1;//add 10% of String height between the two strings
+	       
 
-	        sY = (int)(sY + 50);
-	        sX = (int)((menuFace.getWidth() - inst1Rect.getWidth()) / 0.7);
-	        g2d.setFont(instruction2Font);
-	        g2d.drawString(INSTRUCTIONS1,sX,sY);
+	        g2d.setFont(titleFont);
+	        g2d.drawString(TITLE,sX,sY);
 	        
 	        
-	        sY = sY + 25;
-	        //sX = (int)(menuFace.getWidth() - inst2Rect.getWidth()) / 4;
-	        g2d.drawString(INSTRUCTIONS2,sX, sY);
-
-	        sY = sY+ 25;
-	        //sX = (int)(menuFace.getWidth() - inst3Rect.getWidth()) / 4;
-	        g2d.drawString(INSTRUCTIONS3,sX, sY);
-
-	        sY = sY+ 25;
-	        //sX = (int)(menuFace.getWidth() - inst4Rect.getWidth()) / 4;
-	        g2d.drawString(INSTRUCTIONS4,sX, sY);
-			
-
-
-
-
-
-
-	    }
+	        g2d.setColor(Color.GRAY.brighter());
+	        g2d.setFont(listFont);
+	        drawString(g2d,scoreMessage,220,225);
+	        }
 
 	    private void drawButton(Graphics2D g2d){
 
@@ -206,7 +195,18 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	            g2d.drawString(BACK_TEXT,x,y);
 	        }
 	    }
-
+	    
+	    
+	    
+	    private String displayScores() throws IOException {
+	        Integer[] scores = TextFileController.readFromFile();
+	        Arrays.sort(scores, Collections.reverseOrder());
+	        
+	        String result = StringUtils.join(scores,"\n");
+	        
+	        return result; 
+	    }
+	    
 	    @Override
 	    public void mouseClicked(MouseEvent mouseEvent) {
 	        Point p = mouseEvent.getPoint();
@@ -258,4 +258,5 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 
 	    }
 	
+
 }

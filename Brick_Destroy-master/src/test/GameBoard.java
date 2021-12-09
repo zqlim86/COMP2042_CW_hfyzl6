@@ -21,6 +21,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.FontRenderContext;
+import java.io.IOException;
+
+import test.TextFileController;
 
 
 
@@ -79,11 +82,18 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         gameTimer = new Timer(10,e ->{
             wall.move();
             wall.findImpacts();
-            message = String.format("Bricks: %d Balls %d",wall.getBrickCount(),wall.getBallCount());
+            message = String.format("Bricks: %d Balls: %d Score: %d",wall.getBrickCount(),wall.getBallCount(),wall.getScoreCount()); //Add Score View
             if(wall.isBallLost()){
                 if(wall.ballEnd()){
-                    wall.wallReset();
-                    message = "Game over";
+                	
+                	wall.wallReset();
+                    message = "Game over. Score:" + wall.getScoreCount();
+                	
+                	try {
+						TextFileController.appendToFile(wall.getScoreCount());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
                 }
                 wall.ballReset();
                 gameTimer.stop();
@@ -97,7 +107,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                     wall.nextLevel();
                 }
                 else{
-                    message = "ALL WALLS DESTROYED";
+                    message = "ALL WALLS DESTROYED! Score:" + wall.getScoreCount();
+                    try {
+						TextFileController.appendToFile(wall.getScoreCount());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
                     gameTimer.stop();
                 }
             }
@@ -262,6 +277,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setFont(tmpFont);
         g2d.setColor(tmpColor);
     }
+    
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
