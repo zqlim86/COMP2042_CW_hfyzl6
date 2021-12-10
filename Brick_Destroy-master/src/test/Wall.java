@@ -15,11 +15,16 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package test;
+package test; 
 
 import java.awt.*;
+import java.awt.geom.*;
 import java.awt.geom.Point2D;
 import java.util.Random;
+
+
+
+
 
 
 public class Wall {
@@ -36,6 +41,8 @@ public class Wall {
     Brick[] bricks;
     Ball ball;
     Player player;
+    FirePowerup fPowerup;
+    PlayerPowerup pPowerup;
 
     private Brick[][] levels;
     private int level;
@@ -45,14 +52,16 @@ public class Wall {
     private int ballCount;
     private int scoreCount;
     private boolean ballLost;
+    private boolean pPowerCount = false;
+    
 
     public Wall(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
 
-        this.startPoint = new Point(ballPos);
+        this.startPoint = new Point(ballPos); 
 
         levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
-
+        
         ballCount = 3;
         ballLost = false;
 
@@ -72,8 +81,12 @@ public class Wall {
         }while(speedY == 0);
 
         ball.setSpeed(speedX,speedY);
+        
+        fPowerup = new FirePowerup();
+        
+        pPowerup = new PlayerPowerup();
 
-        player = new Player((Point) ballPos.clone(),150,10, drawArea);
+        player = new Player((Point) ballPos.clone(),10, drawArea);
 
         area = drawArea;
 
@@ -164,6 +177,7 @@ public class Wall {
         }
         return tmp;
     }
+    
 
     private void makeBall(Point2D ballPos){
         ball = new RubberBall(ballPos);
@@ -183,19 +197,38 @@ public class Wall {
         ball.move();
     }
 
+    
     public void findImpacts(){
         if(player.impact(ball)){
             ball.reverseY();
+        }
+        else if(fPowerup.impact(ball)){
+        	
+        	ball.setFireball(3);
+        	
+        }
+        else if(pPowerup.impact(ball)) {
+        	
+        	if(player.getWidth()<230){
+	        	if(pPowerCount == false) {
+	        		player.setWidth(20);
+	        		pPowerCount = true;
+	        	}
+        	}
+        	System.out.println(player.width);
+        
         }
         else if(impactWall()){
             /*for efficiency reverse is done into method impactWall
             * because for every brick program checks for horizontal and vertical impacts
             */
+        	pPowerCount = false;
             brickCount--;
             scoreCount += 5;
             
         }
         else if(impactBorder()) {
+        	pPowerCount = false;
             ball.reverseX();
         }
         else if(ball.getPosition().getY() < area.getY()){
@@ -206,9 +239,10 @@ public class Wall {
             ballLost = true;
         }
     }
-
+    
     private boolean impactWall(){
         for(Brick b : bricks){
+        	if(ball.checkFire() == false) {
             switch(b.findImpact(ball)) {
                 //Vertical Impact
                 case Brick.UP_IMPACT:
@@ -226,6 +260,25 @@ public class Wall {
                     ball.reverseX();
                     return b.setImpact(ball.left,Brick.Crack.LEFT);
             }
+          }
+          if(ball.checkFire() == true)
+          {
+        	  switch(b.findImpact(ball)) {
+              //Vertical Impact
+              case Brick.UP_IMPACT:
+                  return b.setImpact(ball.down, Brick.Crack.UP);
+              case Brick.DOWN_IMPACT:
+                  return b.setImpact(ball.up,Brick.Crack.DOWN);
+
+              //Horizontal Impact
+              case Brick.LEFT_IMPACT:
+                  return b.setImpact(ball.right,Brick.Crack.RIGHT);
+              case Brick.RIGHT_IMPACT:
+                  return b.setImpact(ball.left,Brick.Crack.LEFT);
+          }
+        	  
+          }
+        	
         }
         return false;
     }

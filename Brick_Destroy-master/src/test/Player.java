@@ -21,6 +21,7 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
+ 
 
 public class Player {
 
@@ -30,16 +31,17 @@ public class Player {
 
     private static final int DEF_MOVE_AMOUNT = 5;
 
-    private Rectangle playerFace;
+    public Rectangle playerFace;
     private Point ballPoint;
     private int moveAmount;
     private int min;
     private int max;
+    public int width = 150;
 
 
-    public Player(Point ballPoint,int width,int height,Rectangle container) {
+    public Player(Point ballPoint,int height,Rectangle container) {
         this.ballPoint = ballPoint;
-        moveAmount = 0;
+        moveAmount = 0; 
         playerFace = makeRectangle(width, height);
         min = container.x + (width / 2);
         max = min + container.width - width;
@@ -74,13 +76,25 @@ public class Player {
     public void stop(){
         moveAmount = 0;
     }
+    
+    public int getWidth() {
+    	return width;
+    }
+    
+    public void setWidth(int newWidth) {
+    	width += newWidth;
+    	playerFace= makeRectangle(width,10);
+    	
+    }
 
     public Shape getPlayerFace(){
         return  playerFace;
-    }
+    } 
 
     public void moveTo(Point p){
         ballPoint.setLocation(p);
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
+    
+
 }

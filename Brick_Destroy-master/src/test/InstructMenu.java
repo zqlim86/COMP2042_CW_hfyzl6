@@ -25,7 +25,7 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	    private static final Color BG_COLOR = Color.BLACK;
 	    private static final Color TEXT_COLOR = Color.GRAY.brighter();
 	    private static final Color CLICKED_BUTTON_COLOR = Color.GRAY;
-	    private static final Color CLICKED_TEXT = Color.GRAY.darker();
+	    private static final Color CLICKED_TEXT = Color.GRAY.darker(); 
 	    private static final int BORDER_SIZE = 5;
 	    private static final float[] DASHES = {12,6};
 
@@ -39,7 +39,7 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	    private GameFrame owner;
 
 	    private Font buttonFont;
-	    Image icon = new ImageIcon(getClass().getResource("/resources/galaxy2.gif")).getImage();
+	    Image icon = new ImageIcon(getClass().getResource("/resources/galaxy1.gif")).getImage();
 
 
 	    private boolean backClicked;

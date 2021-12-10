@@ -3,6 +3,9 @@ package test;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /**
  * Created by filippo on 04/09/16.
@@ -24,6 +27,11 @@ abstract public class Ball {
 
     private int speedX;
     private int speedY;
+    
+    private Timer timer;
+    private boolean setFire;
+    private int setFireTime;
+    
 
     public Ball(Point2D center,int radiusA,int radiusB,Color inner,Color border){
         this.center = center;
@@ -45,6 +53,8 @@ abstract public class Ball {
         this.inner  = inner;
         speedX = 0;
         speedY = 0;
+        
+        timer = new Timer();
     }
 
     protected abstract Shape makeBall(Point2D center,int radiusA,int radiusB);
@@ -61,7 +71,28 @@ abstract public class Ball {
 
         ballFace = tmp;
     }
-
+    
+    public void setFireball(int seconds) {
+    	if(!setFire) {
+			setFireTime = seconds;
+			setFire = true;
+	        timer.schedule(new RemindTask(), seconds*1000);
+	        inner = Color.RED;
+		}
+    }
+    
+    public boolean checkFire() {
+    	return setFire;
+    }
+    
+    
+    class RemindTask extends TimerTask {
+        public void run() {
+        	setFire = false;
+        	inner = new Color(255, 219, 88);
+        }
+    }
+    
     public void setSpeed(int x,int y){
         speedX = x;
         speedY = y;

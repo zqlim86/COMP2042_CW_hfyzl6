@@ -60,13 +60,13 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private Font buttonFont;
 
     private GameFrame owner;
-
+ 
     private boolean startClicked;
     private boolean instructClicked;
     private boolean scoreClicked;
     private boolean menuClicked;
     
-    Image icon = new ImageIcon(getClass().getResource("/resources/galaxy2.gif")).getImage();
+    Image icon = new ImageIcon(getClass().getResource("/resources/galaxy1.gif")).getImage();
 
     public HomeMenu(GameFrame owner,Dimension area){
     	

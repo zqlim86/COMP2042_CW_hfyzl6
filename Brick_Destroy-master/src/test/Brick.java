@@ -31,7 +31,7 @@ abstract public class Brick  {
 
         public static final int LEFT = 10;
         public static final int RIGHT = 20;
-        public static final int UP = 30;
+        public static final int UP = 30; 
         public static final int DOWN = 40;
         public static final int VERTICAL = 100;
         public static final int HORIZONTAL = 200;
@@ -102,7 +102,7 @@ abstract public class Brick  {
 
             }
         }
-
+ 
         protected void makeCrack(Point start, Point end){
 
             GeneralPath path = new GeneralPath();
@@ -187,7 +187,6 @@ abstract public class Brick  {
 
     private boolean broken;
 
-
     public Brick(String name, Point pos,Dimension size,Color border,Color inner,int strength){
         rnd = new Random();
         broken = false;
@@ -203,7 +202,7 @@ abstract public class Brick  {
 
     public  boolean setImpact(Point2D point , int dir){
         if(broken)
-            return false;
+        	return false;
         impact();
         return  broken;
     }
@@ -235,7 +234,8 @@ abstract public class Brick  {
             out = UP_IMPACT;
         return out;
     }
-
+    
+    //for drawing only.
     public final boolean isBroken(){
         return broken;
     }
@@ -249,7 +249,7 @@ abstract public class Brick  {
         strength--;
         broken = (strength == 0);
     }
-
+    
 
 
 }

@@ -34,13 +34,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private static final String EXIT = "Exit";
     private static final String PAUSE = "Pause Menu";
     private static final int TEXT_SIZE = 30;
-    private static final Color MENU_COLOR = new Color(0,255,0);
+    private static final Color MENU_COLOR = new Color(0,255,0); 
 
 
     private static final int DEF_WIDTH = 600;
     private static final int DEF_HEIGHT = 450;
-
-    private static final Color BG_COLOR = Color.WHITE;
 
     private Timer gameTimer;
 
@@ -55,9 +53,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Rectangle continueButtonRect;
     private Rectangle exitButtonRect;
     private Rectangle restartButtonRect;
-    private int strLen;
+    private int strLen; 
 
     private DebugConsole debugConsole;
+    Image icon = new ImageIcon(getClass().getResource("/resources/galaxy2.gif")).getImage();
 
 
     public GameBoard(JFrame owner){
@@ -70,8 +69,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         menuFont = new Font("Monospaced",Font.PLAIN,TEXT_SIZE);
 
-
-        this.initialize();
+ 
+        this.initialize(); 
         message = "";
         wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
 
@@ -82,6 +81,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         gameTimer = new Timer(10,e ->{
             wall.move();
             wall.findImpacts();
+            if(wall.player.width>150) {
+            	
+            }
+            
+            
             message = String.format("Bricks: %d Balls: %d Score: %d",wall.getBrickCount(),wall.getBallCount(),wall.getScoreCount()); //Add Score View
             if(wall.isBallLost()){
                 if(wall.ballEnd()){
@@ -137,13 +141,16 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     public void paint(Graphics g){
 
         Graphics2D g2d = (Graphics2D) g;
+       
 
         clear(g2d);
 
-        g2d.setColor(Color.BLUE);
+        g2d.setColor(Color.GREEN);
         g2d.drawString(message,250,225);
 
         drawBall(wall.ball,g2d);
+        
+        drawPowerup(wall.fPowerup,wall.pPowerup,g2d);
 
         for(Brick b : wall.bricks)
             if(!b.isBroken())
@@ -158,10 +165,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     }
 
     private void clear(Graphics2D g2d){
-        Color tmp = g2d.getColor();
-        g2d.setColor(BG_COLOR);
-        g2d.fillRect(0,0,getWidth(),getHeight());
-        g2d.setColor(tmp);
+        g2d.drawImage(icon, 1, 1, getWidth(), getHeight(), this);
     }
 
     private void drawBrick(Brick brick,Graphics2D g2d){
@@ -174,6 +178,18 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.draw(brick.getBrick());
 
 
+        g2d.setColor(tmp);
+    }
+   
+    private void drawPowerup(FirePowerup powerup,PlayerPowerup pPowerup,Graphics2D g2d){
+        Color tmp = g2d.getColor();
+
+        Shape s = powerup.getMultiFace();
+        Shape s2 = pPowerup.getMultiFace();
+        
+        g2d.drawImage(powerup.getImage(),150,250,25,25,null);
+        g2d.drawImage(pPowerup.getImage(),400,250,25,25,null);
+        
         g2d.setColor(tmp);
     }
 
@@ -205,6 +221,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     }
 
     private void drawMenu(Graphics2D g2d){
+    	g2d.drawImage(icon, 1, 1, DEF_WIDTH, DEF_HEIGHT, this);
         obscureGameBoard(g2d);
         drawPauseMenu(g2d);
     }

@@ -42,8 +42,8 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	    private GameFrame owner;
 
 	    private Font buttonFont;
-	    Image icon = new ImageIcon(getClass().getResource("/resources/galaxy2.gif")).getImage();
-
+	    Image icon = new ImageIcon(getClass().getResource("/resources/galaxy1.gif")).getImage();
+ 
 
 	    
 
