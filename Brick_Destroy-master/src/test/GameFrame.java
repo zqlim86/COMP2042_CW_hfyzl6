@@ -34,6 +34,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     private HomeMenu homeMenu;
     private InstructMenu instructMenu;
     private ScoreboardMenu scoreboardMenu;
+    private Intro intro;
 
     private boolean gaming;
 
@@ -51,9 +52,13 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         scoreboardMenu = new ScoreboardMenu(this, new Dimension(450,600));
 
         homeMenu = new HomeMenu(this,new Dimension(450,300));
+        
+        intro = new Intro(this, new Dimension(500,400));
 
-        this.add(homeMenu,BorderLayout.CENTER);
-
+        //this.add(homeMenu,BorderLayout.CENTER);
+        
+        this.add(intro,BorderLayout.CENTER);
+        
         this.setUndecorated(true);
 
 
@@ -67,10 +72,23 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setVisible(true);
     }
     
+    public void enableIntro(){
+        this.dispose();
+        this.add(intro,BorderLayout.CENTER);
+        this.setUndecorated(false);
+        initialize();
+        /*to avoid problems with graphics focus controller is added here*/
+        this.addWindowFocusListener(this);
+    }
+
+    
+    
     public void enableHomeMenu(){
         this.dispose();
+        this.remove(intro);
         this.remove(instructMenu);
         this.remove(scoreboardMenu);
+        this.remove(gameBoard);
         this.add(homeMenu,BorderLayout.CENTER);
         this.setUndecorated(false);
         initialize();

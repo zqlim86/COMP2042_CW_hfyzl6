@@ -30,6 +30,7 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	    private static final float[] DASHES = {12,6};
 	    
 	    private int printscores = 8;
+	    private String nameMessage;
 	    private String scoreMessage;
 	    private boolean backClicked;
 
@@ -53,6 +54,7 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	    	BackgroundMusic.init();
 	    	BackgroundMusic.load("/SFX/ButtonEffect.mp3", "ButtonEffect");
 	    	
+	    	nameMessage = displayNames();
 	    	scoreMessage = displayScores();
 	        this.setFocusable(true);
 	        this.requestFocusInWindow();
@@ -155,10 +157,13 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	        g2d.setFont(titleFont);
 	        g2d.drawString(TITLE,sX,sY);
 	        
+	        g2d.setColor(Color.GRAY.brighter());
+	        g2d.setFont(listFont);
+	        drawString(g2d,nameMessage,180,180);
 	        
 	        g2d.setColor(Color.GRAY.brighter());
 	        g2d.setFont(listFont);
-	        drawString(g2d,scoreMessage,220,225);
+	        drawString(g2d,scoreMessage,260,180);
 	        }
 
 	    private void drawButton(Graphics2D g2d){
@@ -197,10 +202,16 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	    }
 	    
 	    
+	    private String displayNames() throws IOException{
+	    	String[] names = TextFileController.nReadFromFile();
+	    	
+	    	String result = StringUtils.join(names,"\n");
+	    	
+	    	return result;
+	    }
 	    
 	    private String displayScores() throws IOException {
 	        Integer[] scores = TextFileController.readFromFile();
-	        Arrays.sort(scores, Collections.reverseOrder());
 	        
 	        String result = StringUtils.join(scores,"\n");
 	        

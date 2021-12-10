@@ -96,14 +96,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         gameTitleFont = new Font("Helvetica Neue",Font.BOLD,40);
         creditsFont = new Font("Helvetica Neue",Font.BOLD,12);
         buttonFont = new Font("Helvetica Neue",Font.PLAIN,startButton.height-4);
-        
-    	BackgroundMusic.load("/SFX/MenuMusic.mp3", "MenuMusic");
-    	BackgroundMusic.load("/SFX/ButtonEffect.mp3", "ButtonEffect");
-    	BackgroundMusic.setVolume("MenuMusic",-15);
-    	BackgroundMusic.loop("MenuMusic", 1000, 1000, BackgroundMusic.getFrames("MenuMusic") - 1000);
-        
-
-
+   
     }
 
 
@@ -317,6 +310,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         Point p = mouseEvent.getPoint();
         if(startButton.contains(p)){
         	BackgroundMusic.play("ButtonEffect");
+        	BackgroundMusic.stop("MenuMusic");
+        	BackgroundMusic.load("/SFX/GameTheme.mp3", "GameTheme");
+        	BackgroundMusic.setVolume("GameTheme", -20);
+        	BackgroundMusic.loop("GameTheme");
         	owner.enableGameBoard();
         	
 

@@ -23,10 +23,6 @@ import java.awt.geom.Point2D;
 import java.util.Random;
 
 
-
-
-
-
 public class Wall {
 
     private static final int LEVELS_COUNT = 4;
@@ -57,7 +53,7 @@ public class Wall {
 
     public Wall(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
 
-        this.startPoint = new Point(ballPos); 
+        this.startPoint = new Point(ballPos);
 
         levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
@@ -199,11 +195,17 @@ public class Wall {
 
     
     public void findImpacts(){
+    	BackgroundMusic.load("/SFX/BrickBounce.mp3", "BrickBounce");
+    	BackgroundMusic.setVolume("BrickBounce",-25);
+    	BackgroundMusic.load("/SFX/Powerup1.mp3", "Powerup1");
+    	BackgroundMusic.setVolume("Powerup1",-15);
+    	BackgroundMusic.load("/SFX/Powerup2.mp3", "Powerup2");
+    	BackgroundMusic.setVolume("Powerup2",-15);
         if(player.impact(ball)){
             ball.reverseY();
         }
         else if(fPowerup.impact(ball)){
-        	
+        	BackgroundMusic.play("Powerup1");
         	ball.setFireball(3);
         	
         }
@@ -211,6 +213,7 @@ public class Wall {
         	
         	if(player.getWidth()<230){
 	        	if(pPowerCount == false) {
+	            	BackgroundMusic.play("Powerup2");
 	        		player.setWidth(20);
 	        		pPowerCount = true;
 	        	}
@@ -222,6 +225,7 @@ public class Wall {
             /*for efficiency reverse is done into method impactWall
             * because for every brick program checks for horizontal and vertical impacts
             */
+        	BackgroundMusic.play("BrickBounce");
         	pPowerCount = false;
             brickCount--;
             scoreCount += 5;

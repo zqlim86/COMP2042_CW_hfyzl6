@@ -31,7 +31,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     private static final String CONTINUE = "Continue";
     private static final String RESTART = "Restart";
-    private static final String EXIT = "Exit";
+    private static final String MENU = "Main Menu";
     private static final String PAUSE = "Pause Menu";
     private static final int TEXT_SIZE = 30;
     private static final Color MENU_COLOR = new Color(0,255,0); 
@@ -54,6 +54,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Rectangle exitButtonRect;
     private Rectangle restartButtonRect;
     private int strLen; 
+    private GameFrame owner;
 
     private DebugConsole debugConsole;
     Image icon = new ImageIcon(getClass().getResource("/resources/galaxy2.gif")).getImage();
@@ -62,10 +63,13 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     public GameBoard(JFrame owner){
         super();
 
+        BackgroundMusic.init();
+    	BackgroundMusic.load("/SFX/ButtonEffect.mp3", "ButtonEffect");
+        
         strLen = 0;
         showPauseMenu = false;
 
-
+        this.owner = (GameFrame) owner;
 
         menuFont = new Font("Monospaced",Font.PLAIN,TEXT_SIZE);
 
@@ -93,7 +97,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 	wall.wallReset();
                     message = "Game over. Score:" + wall.getScoreCount();
                 	
+                    String name = JOptionPane.showInputDialog("Please Enter Your Name:");
+                    
                 	try {
+                		TextFileController.nAppendToFile(name);
 						TextFileController.appendToFile(wall.getScoreCount());
 					} catch (IOException e1) {
 						e1.printStackTrace();
@@ -287,7 +294,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             exitButtonRect.setLocation(x,y-exitButtonRect.height);
         }
 
-        g2d.drawString(EXIT,x,y);
+        g2d.drawString(MENU,x,y);
 
 
 
@@ -340,10 +347,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         if(!showPauseMenu)
             return;
         if(continueButtonRect.contains(p)){
+        	BackgroundMusic.play("ButtonEffect");
             showPauseMenu = false;
             repaint();
         }
         else if(restartButtonRect.contains(p)){
+        	BackgroundMusic.play("ButtonEffect");
             message = "Restarting Game...";
             wall.ballReset();
             wall.wallReset();
@@ -351,7 +360,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             repaint();
         }
         else if(exitButtonRect.contains(p)){
-            System.exit(0);
+        	BackgroundMusic.stop("GameTheme");
+        	BackgroundMusic.loop("MenuMusic");
+        	BackgroundMusic.play("ButtonEffect");
+            owner.enableHomeMenu();
         }
 
     }
