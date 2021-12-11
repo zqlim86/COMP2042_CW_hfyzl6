@@ -18,9 +18,8 @@
 package test.Model; 
 
 import java.awt.*;
-import java.awt.geom.*;
 import java.awt.geom.Point2D;
-import java.util.Random;
+
 
 /**
  * Wall class is responsible for all the implementations on the wall,ball and the impacts.
@@ -33,7 +32,6 @@ public class Wall {
     private static final int STEEL = 2;
     private static final int CEMENT = 3;
 
-    private Random rnd;
     private Rectangle area;
 
     public Brick[] bricks;
@@ -52,9 +50,11 @@ public class Wall {
     private boolean ballLost;
     private boolean pPowerCount = false;
     
+    public int speedX = 3;
+    public int speedY = -3;
+    
     /**
      * construct for class Wall which initialize and set values for startPoint, levels, ballCount, area
-     * it also initializes a random speed for ball for every new level
      *
      * @param drawArea Rectangle GameFrame where game is rendered/drawn
      * @param brickCount number of bricks in wall(30)
@@ -72,10 +72,9 @@ public class Wall {
         ballCount = 3;
         ballLost = false;
 
-        rnd = new Random();
+
 
         makeBall(ballPos);
-        int speedX,speedY;
         do{
         	
         	speedX = 3;
@@ -214,6 +213,70 @@ public class Wall {
         ball = new RubberBall(ballPos);
     }
     
+    /**
+     * makeStripesLevel creates a level using 3 types of bricks, where each row of bricks is its own type
+     * @param drawArea Rectangle GameFrame where game is rendered/drawn
+     * @param brickCnt brickCnt number of bricks in wall(30)
+     * @param lineCnt lines of bricks in wall(3)
+     * @param brickSizeRatio width-to-height ratio of a single brick
+     * @param typeA first type of brick
+     * @param typeB second type of brick
+     * @return array with 31 bricks
+     * @return 
+     */
+    private Brick[] makeStripesLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB, int typeC){
+        /*
+          if brickCount is not divisible by line count,brickCount is adjusted to the biggest
+          multiple of lineCount smaller then brickCount
+         */
+        brickCnt -= brickCnt % lineCnt;
+
+        int brickOnLine = brickCnt / lineCnt;
+
+
+        double brickLen = drawArea.getWidth() / brickOnLine;
+        double brickHgt = brickLen / brickSizeRatio;
+
+        brickCnt += lineCnt / 2;
+
+        Brick[] tmp  = new Brick[brickCnt];
+
+        Dimension brickSize = new Dimension((int) brickLen,(int) brickHgt);
+        Point p = new Point();
+
+        int i;
+        for(i = 0; i < tmp.length; i++){
+            int line = i / brickOnLine;
+            if(line == lineCnt)
+                break;
+            int posX = i % brickOnLine;
+            double x = posX * brickLen;
+            x =(line % 2 == 0) ? x : (x - (brickLen / 2));
+            double y = (line) * brickHgt;
+            p.setLocation(x,y);
+
+            if(line % 3 == 0){
+                tmp[i] = makeBrick(p,brickSize,typeA);
+            }else if(line % 3 == 1){
+                tmp[i] = makeBrick(p,brickSize,typeB);
+            }else{
+                tmp[i] = makeBrick(p,brickSize,typeC);
+            }
+        }
+
+        for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
+            double x = (brickOnLine * brickLen) - (brickLen / 2);
+            p.setLocation(x,y);
+            if(y%3 == 0) {
+                tmp[i] = makeBrick(p, brickSize, typeA);
+            }else if(y%3 == 1){
+                tmp[i] = makeBrick(p, brickSize, typeB);
+            }else{
+                tmp[i] = makeBrick(p,brickSize, typeC);
+            }
+        }
+        return tmp;
+    }
     
     /**
      * makeLevels is a Private Method that creates the wall based on the levels.
@@ -226,9 +289,11 @@ public class Wall {
     private Brick[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
         tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
-        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
-        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
-        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
+        tmp[1] = makeChessboardLevel(drawArea,40,4,brickDimensionRatio,CLAY,CEMENT);
+        tmp[2] = makeChessboardLevel(drawArea,50,5,brickDimensionRatio,STEEL,CEMENT);
+        tmp[3] = makeStripesLevel(drawArea,60,6,brickDimensionRatio,CLAY,STEEL,CEMENT);
+        tmp[3] = makeStripesLevel(drawArea,70,7,brickDimensionRatio,CEMENT,STEEL,CEMENT);
+        
         return tmp;
     }
     
@@ -394,14 +459,6 @@ public class Wall {
     public void ballReset(){
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
-        int speedX,speedY;
-        do{
-            speedX = 3;
-        }while(speedX == 0);
-        do{
-            speedY = -3;
-        }while(speedY == 0);
-
         ball.setSpeed(speedX,speedY);
         ballLost = false;
     }
@@ -433,10 +490,20 @@ public class Wall {
     
     /**
      * it goes to the next level, and it also restores the brickCount back to 31
+     * increases ball speed, but speed cap at 4.
      */
     public void nextLevel(){
         bricks = levels[level++];
         this.brickCount = bricks.length;
+        
+        if(speedX<4) {        
+            speedX += 1;
+            speedY -= 1;
+            ball.setSpeed(speedX,speedY);
+        }
+
+        
+        
     }
     
     /**
