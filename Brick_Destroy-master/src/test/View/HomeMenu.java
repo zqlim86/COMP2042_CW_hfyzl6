@@ -15,9 +15,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package test;
+package test.View;
 
 import javax.swing.*;
+
+import test.Controller.GameFrame;
+import test.Model.BackgroundMusic;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -26,7 +30,10 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
 
-
+/**
+ * HomeMenu class comes after Intro class.
+ * Displays the Game Title, Start, Instruction, Scoreboard, Exit;
+ */
 public class HomeMenu extends JComponent implements MouseListener, MouseMotionListener {
 	
     private static final String GAME_TITLE = "BRICK DESTROY";
@@ -67,7 +74,14 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private boolean menuClicked;
     
     Image icon = new ImageIcon(getClass().getResource("/resources/galaxy1.gif")).getImage();
-
+    
+    /**
+     * Constructor for class HomeMenu that construct HomeMenu as a JComponent
+     * Set the values for buttons size, font size, font style
+     *
+     * @param owner GameFrame
+     * @param area Dimension size for HomeMenu
+     */
     public HomeMenu(GameFrame owner,Dimension area){
     	
     	BackgroundMusic.init();
@@ -99,12 +113,21 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
    
     }
 
-
+    /**
+     * paint is an Overridden Method from the JComponent class.
+     * Method to invoke the painting of the HomeMenu page.
+     * Calls the drawMenu method.
+     * @param g
+     */
     public void paint(Graphics g){
         drawMenu((Graphics2D)g);
     }
 
-
+    /**
+     * draws component on menuFace by calling the following method: drawContainer, drawText, drawButton
+     * set background image of home menu.
+     * @param g2d graphics2D object
+     */
     public void drawMenu(Graphics2D g2d){
 
         drawContainer(g2d);
@@ -132,7 +155,11 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         g2d.setFont(prevFont);
         g2d.setColor(prevColor);
     }
-
+    
+    /**
+     * draw the background, and border for HomeMenu
+     * @param g2d graphics2D object
+     */
     private void drawContainer(Graphics2D g2d){
         Color prev = g2d.getColor();
 
@@ -153,7 +180,11 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
         g2d.setColor(prev);
     }
-
+    
+    /**
+     * draw the texts, greetings, gameTitle, credits in specific location on HomeMenu
+     * @param g2d graphics2D object
+     */
     private void drawText(Graphics2D g2d){
 
         g2d.setColor(TEXT_COLOR);
@@ -180,7 +211,11 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
 
     }
-
+    
+    /**
+     * draw the buttons, start, instruction, scoreboard, exit in order on HomeMenu screen
+     * @param g2d graphics2D object
+     */
     private void drawButton(Graphics2D g2d){
 
         FontRenderContext frc = g2d.getFontRenderContext();
@@ -304,7 +339,15 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
          
     }
    
-    
+    /**
+     * method is only activated when buttons are clicked
+     * if startButton is clicked then enableGameBoard is activated
+     * if instructButton is clicked, then enableInstructMenu is activated
+     * if scoreButton is clicked, then enableScoreboardMenu is activated
+     * if menuButton is clicked, then print "Goodbye + System.getProperty("user.name")"
+     * every click will play button sound effect.
+     * @param mouseEvent mouse action
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -334,7 +377,11 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
             System.exit(0);
         }
     }
-
+    
+    /**
+     * if either buttons are pressed, then set (start/menu/info)Clicked to true, then repaint the button to white
+     * @param mouseEvent mouse action
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -357,7 +404,11 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
             repaint(menuButton.x,menuButton.y,menuButton.width+1,menuButton.height+1);
         }
     }
-
+    
+    /**
+     * mouseReleased Method invoked when the mouse is released.
+     * @param mouseEvent    to indicate if a mouse action has occurred or not.
+     */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
         if(startClicked ){
@@ -393,7 +444,12 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     public void mouseDragged(MouseEvent mouseEvent) {
 
     }
-
+    
+    /**
+     * mouseMoved Method implements what should happen when the mouse hovers over the START or EXIT button
+     * and what the cursor should look like otherwise.
+     * @param mouseEvent    to indicate if a mouse action has occurred or not.
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();

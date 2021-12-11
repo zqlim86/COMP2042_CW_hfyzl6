@@ -1,7 +1,5 @@
-//Global audio player class.
-//Call init() as soon as possible to instantiate
-//the clips HashMap.
-package test;
+
+package test.Model;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
@@ -13,19 +11,31 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 
+/**
+ * Background Music is a global audio player class.
+ */
 public class BackgroundMusic {
 	
 	private static HashMap<String, Clip> clips;
 	private static int gap;
 	
-	// Creates new clips HashMap.
+	
+	/**
+	 * Creates new clips HashMap.
+	 */
 	public static void init() {
 		clips = new HashMap<String, Clip>();
 		gap = 0;
 	}
 	
-	// Loads up audio located at path "s" and stores
-	// it in the HashMap with key "n".
+
+	/**
+	 * Loads up audio located at path "s" and stores
+	 * it in the HashMap with key "n".
+	 * 
+	 * @param s
+	 * @param n
+	 */
 	public static void load(String s, String n) {
 		if(clips.get(n) != null) return;
 		Clip clip;
@@ -54,10 +64,21 @@ public class BackgroundMusic {
 		}
 	}
 	
+	/**
+	 * Play the music loaded.
+	 * 
+	 * @param s
+	 */
 	public static void play(String s) {
 		play(s, gap);
 	}
 	
+	/**
+	 * Play the music with time limit.
+	 * 
+	 * @param s
+	 * @param i
+	 */
 	public static void play(String s, int i) {
 		Clip c = clips.get(s);
 		if(c == null) return;
@@ -66,34 +87,75 @@ public class BackgroundMusic {
 		while(!c.isRunning()) c.start();
 	}
 	
+	/**
+	 * Stop the music playing.
+	 * 
+	 * @param s
+	 */
 	public static void stop(String s) {
 		if(clips.get(s) == null) return;
 		if(clips.get(s).isRunning()) clips.get(s).stop();
 	}
 	
+	/**
+	 * Resume the music.
+	 * 
+	 * @param s
+	 */
 	public static void resume(String s) {
 		if(clips.get(s).isRunning()) return;
 		clips.get(s).start();
 	}
 	
+	/**
+	 * Resume the looped music.
+	 * 
+	 * @param s
+	 */
 	public static void resumeLoop(String s) {
 		Clip c = clips.get(s);
 		if(c == null) return;
 		c.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
+	/**
+	 * Loop the music loaded.
+	 * 
+	 * @param s
+	 */
 	public static void loop(String s) {
 		loop(s, gap, gap, clips.get(s).getFrameLength() - 1);
 	}
 	
+	/**
+	 * Loop the music with frame set.
+	 * 
+	 * @param s
+	 * @param frame
+	 */
 	public static void loop(String s, int frame) {
 		loop(s, frame, gap, clips.get(s).getFrameLength() - 1);
 	}
 	
+	/**
+	 * Loop the music with start and end time.
+	 * 
+	 * @param s
+	 * @param start
+	 * @param end
+	 */
 	public static void loop(String s, int start, int end) {
 		loop(s, gap, start, end);
 	}
 	
+	/**
+	 * Loop the music with frame, start and end.
+	 * 
+	 * @param s
+	 * @param frame
+	 * @param start
+	 * @param end
+	 */
 	public static void loop(String s, int frame, int start, int end) {
 		Clip c = clips.get(s);
 		if(c == null) return;
@@ -115,6 +177,12 @@ public class BackgroundMusic {
 		clips.get(s).close();
 	}
 	
+	/**
+	 * Set the volume of the music loaded.
+	 * 
+	 * @param s
+	 * @param f
+	 */
 	public static void setVolume(String s, float f) {
 		Clip c = clips.get(s);
 		if(c == null) return;

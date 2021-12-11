@@ -1,4 +1,4 @@
-package test;
+package test.View;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +11,14 @@ import java.io.IOException;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 
+import test.Controller.GameFrame;
+import test.Controller.TextFileController;
+import test.Model.BackgroundMusic;
 
 
+/**
+ * Displays the scoreboard.
+ */
 public class ScoreboardMenu extends JComponent implements MouseListener, MouseMotionListener{
 		
 	 	private static final String BACK_TEXT = "Back";
@@ -48,7 +54,14 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 
 	    
 
-
+	    /**
+	     * Set the position of scoreboard menu.
+	     * Set the font style and size.
+	     * Set the back button's dimension.
+	     * 
+	     * @param owner
+	     * @param area
+	     */
 	    public ScoreboardMenu(GameFrame owner, Dimension area) throws IOException {
 	    	
 	    	BackgroundMusic.init();
@@ -79,11 +92,22 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 
 
 	    }
-
+	    
+	    /**
+	     * paint is an Overridden Method from the JComponent class.
+	     * Method to invoke the painting of the ScoreboardMenu page.
+	     * Calls the drawMenu method.
+	     * @param g
+	     */
 	    public void paint(Graphics g){
 	        drawMenu((Graphics2D)g);
 	    }
-
+	    
+	    /**
+	     * draws component on menuFace by calling the following method: drawContainer, drawText, drawButton
+	     * set background image of home menu.
+	     * @param g2d graphics2D object
+	     */
 	    public void drawMenu(Graphics2D g2d){
 
 	        drawContainer(g2d);
@@ -111,7 +135,11 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	        g2d.setFont(prevFont);
 	        g2d.setColor(prevColor);
 	    }
-
+	    
+	    /**
+	     * draw the background, and border for ScoreboardMenu
+	     * @param g2d graphics2D object
+	     */
 	    private void drawContainer(Graphics2D g2d){
 	        Color prev = g2d.getColor();
 
@@ -132,12 +160,17 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 
 	        g2d.setColor(prev);
 	    }
-
+	    
 	    private void drawString(Graphics g, String text, int x, int y) {
 	        for (String line : text.split("\n"))
 	            g.drawString(line, x, y += g.getFontMetrics().getHeight());
 	    }
-
+	    
+	    
+	    /**
+	     * draw the titleRect in specific location on ScoreboardMenu
+	     * @param g2d graphics2D object
+	     */
 	    private void drawText(Graphics2D g2d){
 
 	        g2d.setColor(TEXT_COLOR);
@@ -145,7 +178,7 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	        FontRenderContext frc = g2d.getFontRenderContext();
 
 	        Rectangle2D titleRect = titleFont.getStringBounds(TITLE,frc);
-	        //Rectangle2D listRect = titleFont.getStringBounds(,frc);
+	        
 
 	        int sX,sY;
 
@@ -165,7 +198,11 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	        g2d.setFont(listFont);
 	        drawString(g2d,scoreMessage,260,180);
 	        }
-
+	    
+	    /**
+	     * draw the button 'back' on Scoreboard screen
+	     * @param g2d graphics2D object
+	     */
 	    private void drawButton(Graphics2D g2d){
 
 	        FontRenderContext frc = g2d.getFontRenderContext();
@@ -202,6 +239,12 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	    }
 	    
 	    
+	    /**
+	     * Store the name read from file into an array and return the array.
+	     * 
+	     * @return result		String array
+	     * @throws IOException
+	     */
 	    private String displayNames() throws IOException{
 	    	String[] names = TextFileController.nReadFromFile();
 	    	
@@ -210,6 +253,12 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	    	return result;
 	    }
 	    
+	    /**
+	     * Store the score read from file into an array and return the array.
+	     * 
+	     * @return result		String array
+	     * @throws IOException
+	     */
 	    private String displayScores() throws IOException {
 	        Integer[] scores = TextFileController.readFromFile();
 	        
@@ -218,6 +267,13 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	        return result; 
 	    }
 	    
+	    
+	    /**
+	     * method is only activated when buttons are clicked	    
+	     * if backButton is clicked, then play button sound effect and enableHomeMenu.
+	     * every click will play button sound effect.
+	     * @param mouseEvent mouse action
+	     */
 	    @Override
 	    public void mouseClicked(MouseEvent mouseEvent) {
 	        Point p = mouseEvent.getPoint();
@@ -226,7 +282,11 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	            owner.enableHomeMenu();
 	        }
 	    }
-
+	    
+	    /**
+	     * if buttons are pressed, then set backClicked to true, then repaint the button to white
+	     * @param mouseEvent mouse action
+	     */
 	    @Override
 	    public void mousePressed(MouseEvent mouseEvent) {
 	        Point p = mouseEvent.getPoint();
@@ -235,7 +295,11 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	            repaint(backButton.x,backButton.y,backButton.width+1,backButton.height+1);
 	        }
 	    }
-
+	    
+	    /**
+	     * mouseReleased Method invoked when the mouse is released.
+	     * @param mouseEvent    to indicate if a mouse action has occurred or not.
+	     */
 	    @Override
 	    public void mouseReleased(MouseEvent mouseEvent) {
 	        if(backClicked ){
@@ -258,7 +322,12 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	    public void mouseDragged(MouseEvent e) {
 
 	    }
-
+	    
+	    /**
+	     * mouseMoved Method implements what should happen when the mouse hovers over the START or EXIT button
+	     * and what the cursor should look like otherwise.
+	     * @param mouseEvent    to indicate if a mouse action has occurred or not.
+	     */
 	    @Override
 	    public void mouseMoved(MouseEvent mouseEvent) {
 	        Point p = mouseEvent.getPoint();

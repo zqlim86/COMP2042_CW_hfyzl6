@@ -15,13 +15,22 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package test;
+package test.Debug;
 
 import javax.swing.*;
+
+import test.Controller.GameBoard;
+import test.Model.Ball;
+import test.Model.Wall;
+
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+/**
+ * @author ziqin
+ *
+ */
 public class DebugConsole extends JDialog implements WindowListener{
 
     private static final String TITLE = "Debug Console";
@@ -33,8 +42,14 @@ public class DebugConsole extends JDialog implements WindowListener{
     private Wall wall;
 
 
+    /**
+     * DebugConsole is a constructor that initialize's itself and also set values for owner, wall and gameBoard.
+     * @param owner Game's window.
+     * @param wall Game's logic.
+     * @param gameBoard Game's controller.
+     */
     public DebugConsole(JFrame owner,Wall wall,GameBoard gameBoard){
-
+    	
         this.wall = wall;
         this.owner = owner;
         this.gameBoard = gameBoard;
@@ -47,6 +62,9 @@ public class DebugConsole extends JDialog implements WindowListener{
         this.pack();
     }
 
+    /**
+     * Initialize the DebugConsole.
+     */
     private void initialize(){
         this.setModal(true);
         this.setTitle(TITLE);
@@ -57,12 +75,26 @@ public class DebugConsole extends JDialog implements WindowListener{
     }
 
 
+    /**
+     * Set the location of DebugConsole, which is approximately the middle of the window.
+     */
     private void setLocation(){
         int x = ((owner.getWidth() - this.getWidth()) / 2) + owner.getX();
         int y = ((owner.getHeight() - this.getHeight()) / 2) + owner.getY();
         this.setLocation(x,y);
     }
 
+    /**
+     * Will set DebugConsole in the middle of the window.
+     * The slider is automatically set to the value of the ball.
+     * @param windowEvent is the window's status.
+     */
+    @Override
+    public void windowActivated(WindowEvent windowEvent) {
+        setLocation();
+        Ball b = wall.ball;
+        debugPanel.setValues(b.getSpeedX(),b.getSpeedY());
+    }
 
     @Override
     public void windowOpened(WindowEvent windowEvent) {
@@ -87,13 +119,6 @@ public class DebugConsole extends JDialog implements WindowListener{
     @Override
     public void windowDeiconified(WindowEvent windowEvent) {
 
-    }
-
-    @Override
-    public void windowActivated(WindowEvent windowEvent) {
-        setLocation();
-        Ball b = wall.ball;
-        debugPanel.setValues(b.getSpeedX(),b.getSpeedY());
     }
 
     @Override

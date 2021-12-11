@@ -20,8 +20,18 @@ package test;
 import java.awt.*;
 import java.io.IOException;
 
+import test.Controller.GameFrame;
+
+/**
+ * A Brick Breaker Game!
+ * @author ziqin
+ */
 public class GraphicsMain {
 
+    /**
+     * Main Function to run the Brick Breaker Game.
+     * @param args a string array arguments.
+     */
     public static void main(String[] args){
         EventQueue.invokeLater(() -> {
             try {

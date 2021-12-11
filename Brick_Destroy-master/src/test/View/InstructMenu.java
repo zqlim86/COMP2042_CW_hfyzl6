@@ -1,6 +1,10 @@
-package test;
+package test.View;
 
 import javax.swing.*;
+
+import test.Controller.GameFrame;
+import test.Model.BackgroundMusic;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -8,6 +12,9 @@ import java.awt.event.MouseMotionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * Displays the instruction of the game.
+ */
 public class InstructMenu extends JComponent implements MouseListener, MouseMotionListener{
 
 	    //add details in info page
@@ -44,7 +51,15 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 
 	    private boolean backClicked;
 
-
+	    
+	    /**
+	     * Set the position of instruction menu.
+	     * Set the font style and size.
+	     * Set the back button's dimension.
+	     * 
+	     * @param owner
+	     * @param area
+	     */
 	    public InstructMenu(GameFrame owner, Dimension area){
 	    	
 	    	BackgroundMusic.init();
@@ -72,11 +87,23 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 
 
 	    }
-
+	    
+	    /**
+	     * paint is an Overridden Method from the JComponent class.
+	     * Method to invoke the painting of the InstructMenu page.
+	     * Calls the drawMenu method.
+	     * @param g
+	     */
 	    public void paint(Graphics g){
 	        drawMenu((Graphics2D)g);
 	    }
-
+	    
+	    
+	    /**
+	     * draws component on menuFace by calling the following method: drawContainer, drawText, drawButton
+	     * set background image of home menu.
+	     * @param g2d graphics2D object
+	     */
 	    public void drawMenu(Graphics2D g2d){
 
 	        drawContainer(g2d);
@@ -105,6 +132,11 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	        g2d.setColor(prevColor);
 	    }
 
+	    
+	    /**
+	     * draw the background, and border for InstructMenu
+	     * @param g2d graphics2D object
+	     */
 	    private void drawContainer(Graphics2D g2d){
 	        Color prev = g2d.getColor();
 
@@ -127,7 +159,10 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	    }
 
 
-
+	    /**
+	     * draw the instRect, credits in specific location on InstructMenu
+	     * @param g2d graphics2D object
+	     */
 	    private void drawText(Graphics2D g2d){
 
 	        g2d.setColor(TEXT_COLOR);
@@ -171,7 +206,11 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 
 
 	    }
-
+	    
+	    /**
+	     * draw the button 'back' on InstructMenu screen
+	     * @param g2d graphics2D object
+	     */
 	    private void drawButton(Graphics2D g2d){
 
 	        FontRenderContext frc = g2d.getFontRenderContext();
@@ -207,6 +246,13 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	        }
 	    }
 
+	    
+	    /**
+	     * method is only activated when buttons are clicked	    
+	     * if backButton is clicked, then play button sound effect and enableHomeMenu.
+	     * every click will play button sound effect.
+	     * @param mouseEvent mouse action
+	     */
 	    @Override
 	    public void mouseClicked(MouseEvent mouseEvent) {
 	        Point p = mouseEvent.getPoint();
@@ -216,6 +262,10 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	        }
 	    }
 
+	    /**
+	     * if buttons are pressed, then set backClicked to true, then repaint the button to white
+	     * @param mouseEvent mouse action
+	     */
 	    @Override
 	    public void mousePressed(MouseEvent mouseEvent) {
 	        Point p = mouseEvent.getPoint();
@@ -224,7 +274,11 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	            repaint(backButton.x,backButton.y,backButton.width+1,backButton.height+1);
 	        }
 	    }
-
+	    
+	    /**
+	     * mouseReleased Method invoked when the mouse is released.
+	     * @param mouseEvent    to indicate if a mouse action has occurred or not.
+	     */
 	    @Override
 	    public void mouseReleased(MouseEvent mouseEvent) {
 	        if(backClicked ){
@@ -247,7 +301,12 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	    public void mouseDragged(MouseEvent e) {
 
 	    }
-
+	    
+	    /**
+	     * mouseMoved Method implements what should happen when the mouse hovers over the START or EXIT button
+	     * and what the cursor should look like otherwise.
+	     * @param mouseEvent    to indicate if a mouse action has occurred or not.
+	     */
 	    @Override
 	    public void mouseMoved(MouseEvent mouseEvent) {
 	        Point p = mouseEvent.getPoint();

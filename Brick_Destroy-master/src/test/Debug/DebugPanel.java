@@ -15,20 +15,27 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package test;
+package test.Debug;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
+
+import test.Model.Wall;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 
 
+/**
+ * @author ziqin
+ *
+ */
 public class DebugPanel extends JPanel {
 
     private static final Color DEF_BKG = Color.WHITE;
 
-
+    
     private JButton skipLevel;
     private JButton resetBalls;
 
@@ -37,6 +44,10 @@ public class DebugPanel extends JPanel {
 
     private Wall wall;
 
+    /**
+     * DebugPanel Constructor that makes 2 Buttons and Sliders for player to choose levels and reset their ball chance.
+     * @param wall
+     */
     public DebugPanel(Wall wall){
 
         this.wall = wall;
@@ -57,17 +68,34 @@ public class DebugPanel extends JPanel {
 
     }
 
+    /**
+     * Initialize and set layout of DebugPanel with 2 Buttons and Sliders.
+     */
     private void initialize(){
         this.setBackground(DEF_BKG);
         this.setLayout(new GridLayout(2,2));
     }
 
+    /**
+     * Make Buttons
+     * @param title Button's title
+     * @param e Action event
+     * @return Jbutton
+     */
     private JButton makeButton(String title, ActionListener e){
         JButton out = new JButton(title);
         out.addActionListener(e);
         return  out;
     }
 
+    /**
+     * Make Sliders with min/max values.
+     * 
+     * @param min Minimum value of the slider.
+     * @param max Maximum value of the slider.
+     * @param e Change event.
+     * @return JSlider.
+     */
     private JSlider makeSlider(int min, int max, ChangeListener e){
         JSlider out = new JSlider(min,max);
         out.setMajorTickSpacing(1);
@@ -77,6 +105,12 @@ public class DebugPanel extends JPanel {
         return out;
     }
 
+    /**
+     * The Slider is automatically set to the value of the ball when DebugPanel is activated.
+     * 
+     * @param x Ball's X Speed.
+     * @param y Ball's Y Speed.
+     */
     public void setValues(int x,int y){
         ballXSpeed.setValue(x);
         ballYSpeed.setValue(y);

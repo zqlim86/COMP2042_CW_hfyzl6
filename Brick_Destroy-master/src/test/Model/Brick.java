@@ -1,4 +1,4 @@
-package test;
+package test.Model;
 
 import java.awt.*;
 import java.awt.Point;
@@ -6,10 +6,10 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
-/**
- * Created by filippo on 04/09/16.
- *
- */
+
+
+
+
 abstract public class Brick  {
 
     public static final int MIN_CRACK = 1;
@@ -22,8 +22,12 @@ abstract public class Brick  {
     public static final int LEFT_IMPACT = 300;
     public static final int RIGHT_IMPACT = 400;
 
-
-
+    
+    
+    /**
+     * Crack class is a Nested Class under the Brick abstract class as it is a feature of the Brick class.
+     * Responsible for showing crack when ball impacts the bricks.
+     */
     public class Crack{
 
         private static final int CRACK_SECTIONS = 3;
@@ -43,7 +47,15 @@ abstract public class Brick  {
         private int crackDepth;
         private int steps;
 
-
+        
+        /**
+         * Crack is a constructor that creates the crack effect.
+         * Sets a randomly generated path from the point of impact.
+         * Sets the depth of the crack.
+         * Sets the crack steps.
+         * @param crackDepth
+         * @param steps
+         */
         public Crack(int crackDepth, int steps){
 
             crack = new GeneralPath();
@@ -53,16 +65,31 @@ abstract public class Brick  {
         }
 
 
-
+        
+        /**
+         * draw method is for drawing the crack on bricks.
+         * 
+         * @return crack
+         */
         public GeneralPath draw(){
 
             return crack;
         }
 
+        /**
+         * reset method is to reset the crack.
+         */
         public void reset(){
             crack.reset();
         }
 
+        
+        /**
+         * makeCrack is for setting and start and end location of cracks.
+         * 
+         * @param point			point of impact.
+         * @param direction		direction of impact.
+         */
         protected void makeCrack(Point2D point, int direction){
             Rectangle bounds = Brick.this.brickFace.getBounds();
 
@@ -103,6 +130,12 @@ abstract public class Brick  {
             }
         }
  
+        /**
+         * makeCrack method is for randomly creating cracks from start to end position.
+         * 
+         * @param start
+         * @param end
+         */
         protected void makeCrack(Point start, Point end){
 
             GeneralPath path = new GeneralPath();
@@ -134,6 +167,13 @@ abstract public class Brick  {
             crack.append(path,true);
         }
 
+        
+        /**
+         * randomIntBound method is for returning random number between the bound value and negative bound value.
+         * 
+         * @param bound		bound value
+         * @return 			random integer between bound and negative bound value.
+         */
         private int randomInBounds(int bound){
             int n = (bound * 2) + 1;
             return rnd.nextInt(n) - bound;
@@ -187,6 +227,19 @@ abstract public class Brick  {
 
     private boolean broken;
 
+    
+    /**
+     * Brick Constructor if for handling the initial implementation of the brick.
+     * Set brick name.
+     * Set brick status as NOT BROKEN.
+     * Creates the brick.
+     * @param name      brick name
+     * @param pos       brick position/location
+     * @param size      size of the brick
+     * @param border    brick border color
+     * @param inner     brick inner color
+     * @param strength  brick's strength
+     */
     public Brick(String name, Point pos,Dimension size,Color border,Color inner,int strength){
         rnd = new Random();
         broken = false;
@@ -197,9 +250,27 @@ abstract public class Brick  {
         this.fullStrength = this.strength = strength;
 
     }
-
+    
+    /**
+     * makeBrickFace is an Abstract Method which creates the ball.
+     * This method will later be implemented by the Cement, Clay and Steel brick classes or any other extensions the programmer wishes to add
+     * @param pos       the position/location of the brick.
+     * @param size      size of the brick.
+     * @return          returns the brick.
+     */
     protected abstract Shape makeBrickFace(Point pos,Dimension size);
-
+    
+    
+    
+    /**
+     * setImpact method is for detecting if an impact has occured.
+     * If a brick is broken, return false, meaning no impact made.
+     * If a brick is not broken, run impact method and return if the brick is broken or not.
+     * 
+     * @param point		point of impact.
+     * @param dir		direction of impact.
+     * @return			returns boolean value to check if brick is broken or not.
+     */
     public  boolean setImpact(Point2D point , int dir){
         if(broken)
         	return false;
@@ -207,19 +278,37 @@ abstract public class Brick  {
         return  broken;
     }
 
+    /**
+     * getBrick is an abstract method that will implement later.
+     * @return		returns brick.
+     */
     public abstract Shape getBrick();
 
 
-
+    
+    /**
+     * getBorderColor method is for returning border color of brick.
+     * @return		returns border color of brick.
+     */
     public Color getBorderColor(){
         return  border;
     }
-
+    
+    
+    /**
+     * getInnerColor method is for returning inner color of brick.
+     * @return		returns inner color of brick.
+     */
     public Color getInnerColor(){
         return inner;
     }
 
-
+    
+    /**
+     * findImpact method is to determine the direction of impact from the ball to the brick.
+     * @param b		ball
+     * @return		
+     */
     public final int findImpact(Ball b){
         if(broken)
             return 0;
@@ -235,16 +324,29 @@ abstract public class Brick  {
         return out;
     }
     
-    //for drawing only.
+    
+    /**
+     * isBroken method is for returning if brick is broken or not.
+     * @return		returns a boolean value of if brick is broken.
+     */
     public final boolean isBroken(){
         return broken;
     }
 
+    /**
+     * repair method is for repairing the brick.
+     * Set broken back to false and set strength of brick back to fullStrength.
+     */
     public void repair() {
         broken = false;
         strength = fullStrength;
     }
 
+    
+    /**
+     * impact method is to set the broken variable based on brick's state
+     * impact method is also reponsible for decrementing brick's strength when impact happens. 
+     */
     public void impact(){
         strength--;
         broken = (strength == 0);

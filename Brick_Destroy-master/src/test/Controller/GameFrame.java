@@ -15,9 +15,15 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package test;
+package test.Controller;
 
 import javax.swing.*;
+
+import test.View.HomeMenu;
+import test.View.InstructMenu;
+import test.View.Intro;
+import test.View.ScoreboardMenu;
+
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowEvent;
@@ -26,6 +32,9 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 
 
+/**
+ *GameFrame is responsible for implementation of GameFrame window.
+ */
 public class GameFrame extends JFrame implements WindowFocusListener {
 
     private static final String DEF_TITLE = "Brick Destroy";
@@ -38,6 +47,11 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     private boolean gaming;
 
+    
+    
+    /**
+     * GameFrame is a constructor that add the Intro Page to the game frame.
+     */
     public GameFrame() throws IOException{
         super();
 
@@ -54,8 +68,6 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         homeMenu = new HomeMenu(this,new Dimension(450,300));
         
         intro = new Intro(this, new Dimension(500,400));
-
-        //this.add(homeMenu,BorderLayout.CENTER);
         
         this.add(intro,BorderLayout.CENTER);
         
@@ -64,6 +76,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     }
 
+    /**
+     * Initialize GameFrame with a Title.
+     */
     public void initialize(){
         this.setTitle(DEF_TITLE);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -71,18 +86,12 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.autoLocate();
         this.setVisible(true);
     }
-    
-    public void enableIntro(){
-        this.dispose();
-        this.add(intro,BorderLayout.CENTER);
-        this.setUndecorated(false);
-        initialize();
-        /*to avoid problems with graphics focus controller is added here*/
-        this.addWindowFocusListener(this);
-    }
+  
 
-    
-    
+    /**
+     * enableHomeMenu after Intro Page.
+     * This method also removes intro page and other pages.
+     */
     public void enableHomeMenu(){
         this.dispose();
         this.remove(intro);
@@ -97,6 +106,10 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     }
     
+    /**
+     * enableGameBoard method will run after clicking the 'START' Button in Home Menu.
+     * This method will remove homeMenu.
+     */
     public void enableGameBoard(){
         this.dispose();
         this.remove(homeMenu);
@@ -108,6 +121,10 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     }
     
+    /**
+     * enableInstructMenu method will run after clicking the 'INSTRUCTION' Button in Home Menu.
+     * This method will remove homeMenu.
+     */
     public void enableInstructMenu(){
         this.dispose();
         this.remove(homeMenu);
@@ -119,6 +136,11 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     }
     
+    
+    /**
+     * enableScoreboardMenu method will run after clicking the 'SCOREBOARD' Button in Home Menu.
+     * This method will remove homeMenu.
+     */
     public void enableScoreboardMenu(){
         this.dispose();
         this.remove(homeMenu);
@@ -129,7 +151,11 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.addWindowFocusListener(this);
 
     }
-
+    
+    
+    /**
+     * Set the location of gameFrame relative to screenSize.
+     */
     private void autoLocate(){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (size.width - this.getWidth()) / 2;
@@ -138,6 +164,11 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     }
 
     
+    /**
+     * If gameFrame is in use, set gaming to true.
+     * 
+     * @param windowEvent Window's status.
+     */
     @Override
     public void windowGainedFocus(WindowEvent windowEvent) {
         /*
@@ -151,6 +182,12 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         gaming = true;
     }
 
+    /**
+     * If gameFrame is not in use but gaming is still true,
+     * stop timer and display "Focus Lost" on screen
+     * 
+     * @param windowEvent Window's status.
+     */
     @Override
     public void windowLostFocus(WindowEvent windowEvent) {
         if(gaming)

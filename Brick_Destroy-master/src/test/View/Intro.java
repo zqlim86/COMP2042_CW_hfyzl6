@@ -1,13 +1,19 @@
-package test;
+package test.View;
 
 import javax.swing.*;
+
+import test.Controller.GameFrame;
+import test.Model.BackgroundMusic;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
-
+/**
+ * Intro class is the class for the implementation of the starting page when the game begins.
+ */
 public class Intro extends JComponent implements KeyListener {
 	
 	private Rectangle introFace;
@@ -20,6 +26,11 @@ public class Intro extends JComponent implements KeyListener {
 
 	Image icon = new ImageIcon(getClass().getResource("/resources/Intro.gif")).getImage();
 	
+	/**
+	 * Intro constructor will play background music, create a rectangle, set the text font.
+	 * @param owner		GameFrame
+	 * @param area		area Dimension size for Intro
+	 */
 	public Intro(GameFrame owner, Dimension area) {
 		
 			BackgroundMusic.init();
@@ -41,11 +52,21 @@ public class Intro extends JComponent implements KeyListener {
 	
 
 	
-	
+	 /**
+     * paint is an Overridden Method from the JComponent class.
+     * Method to invoke the painting of the Intro page.
+     * Calls the drawMenu method.
+     * @param g
+     */
     public void paint(Graphics g){
         drawIntro((Graphics2D)g);
     }
 	
+    /**
+     * draws component on introFace by calling the following method: drawContainer, drawText
+     * set background gif.
+     * @param g2d graphics2D object
+     */
 	public void drawIntro(Graphics2D g2d) {
 		drawContainer(g2d);
 		g2d.drawImage(icon, 1, 1,(int)(introFace.getWidth()), (int)(introFace.getHeight()), this);
@@ -67,7 +88,10 @@ public class Intro extends JComponent implements KeyListener {
         g2d.setColor(prevColor);
     }
 	
-	
+	 /**
+     * draw background color for Intro
+     * @param g2d graphics2D object
+     */
     private void drawContainer(Graphics2D g2d){
         Color prev = g2d.getColor();
 
@@ -78,6 +102,10 @@ public class Intro extends JComponent implements KeyListener {
         drawText(g2d);
     }
     
+    /**
+     * draw text for Intro
+     * @param g2d graphics2D object
+     */
     private void drawText(Graphics2D g2d){
 
         g2d.setColor(TEXT_COLOR);
@@ -98,6 +126,13 @@ public class Intro extends JComponent implements KeyListener {
 	}
 
 
+    /**
+     * The keyPressed method implements the method in KeyListener.
+     * Listen and act when a key is pressed.
+     * Enter = enableHomeMenu, also changing the background music.
+     * 
+     * @param keyEvent To detect if key has acted.
+     */
 	@Override
 	public void keyPressed(KeyEvent keyEvent) {
 		 switch(keyEvent.getKeyCode()){

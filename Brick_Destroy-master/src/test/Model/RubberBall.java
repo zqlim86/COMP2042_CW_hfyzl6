@@ -15,12 +15,16 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package test;
+package test.Model;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
+/**
+ * RubberBall class is Child Class of the Ball class.
+ * Responsible for all the implementations regarding the rubber ball.
+ */
 public class RubberBall extends Ball {
 
 
@@ -28,12 +32,24 @@ public class RubberBall extends Ball {
     private static final Color DEF_INNER_COLOR = new Color(255, 219, 88);
     private static final Color DEF_BORDER_COLOR = DEF_INNER_COLOR.darker().darker();
 
-
+    /**
+     * Constructor of RubberBall class which set values for position, radius, color in superclass (Ball)
+     *
+     * @param center center position of ball
+     */
     public RubberBall(Point2D center){
         super(center,DEF_RADIUS,DEF_RADIUS,DEF_INNER_COLOR,DEF_BORDER_COLOR);
     }
 
-
+    /**
+     * Overrides parent class's (Ball) makeBall method.
+     * constructs an Ellipse2D shape ball
+     *
+     * @param center center position of ball
+     * @param radiusA horizontal radius of ball
+     * @param radiusB vertical radius of ball
+     * @return Ellipse2D shape ball
+     */
     @Override
     protected Shape makeBall(Point2D center, int radiusA, int radiusB) {
 
