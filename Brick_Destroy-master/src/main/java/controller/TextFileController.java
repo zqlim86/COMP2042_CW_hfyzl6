@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+
+/**
+ *TextFileController is responsible for reading and writing data from text files.
+ */
 public class TextFileController {
 
     /**
