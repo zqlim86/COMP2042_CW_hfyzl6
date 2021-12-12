@@ -7,9 +7,9 @@ import java.awt.geom.Point2D;
 import java.util.Random;
 
 
-
-
-
+/**
+ * Brick is an abstract class that is responsible for the bricks is the game.
+ */
 abstract public class Brick  {
 
     public static final int MIN_CRACK = 1;

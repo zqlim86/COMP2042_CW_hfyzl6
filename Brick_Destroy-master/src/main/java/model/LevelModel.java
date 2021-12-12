@@ -4,6 +4,10 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+
+/**
+ * LevelModel class is responsible for handling different levels in the game.
+ */
 public class LevelModel {
 
     private static final int CLAY = 1;

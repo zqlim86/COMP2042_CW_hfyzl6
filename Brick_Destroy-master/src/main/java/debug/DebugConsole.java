@@ -28,8 +28,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 /**
- * @author ziqin
- *
+ * DebugConsole class handles the implementation of Debug Console Window
  */
 public class DebugConsole extends JDialog implements WindowListener{
 

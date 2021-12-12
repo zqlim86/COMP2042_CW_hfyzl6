@@ -7,12 +7,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * @author ziqin
- *
- */
-
-
-/**
  * Ball is an abstract class that handles the ball movement in game.
  */
 abstract public class Ball {

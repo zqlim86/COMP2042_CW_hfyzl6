@@ -35,11 +35,10 @@ import java.awt.event.*;
 import java.awt.font.FontRenderContext;
 import java.io.IOException;
 
-/**
- * @author ziqin
- *
- */
 
+/**
+ * GameView class is responsible for displaying the in-game view.
+ */
 public class GameView extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
 
     private static final String CONTINUE = "Continue";
@@ -75,9 +74,6 @@ public class GameView extends JComponent implements KeyListener,MouseListener,Mo
 
     public GameView(JFrame owner){
         super();
-
-        //BackgroundMusic.init();
-    	//BackgroundMusic.load("/resources/ButtonEffect.mp3", "ButtonEffect");
         
         strLen = 0;
         showPauseMenu = false;

@@ -28,8 +28,7 @@ import java.awt.event.ActionListener;
 
 
 /**
- * @author ziqin
- *
+ * DebugPanel class controls the debug panel window.
  */
 public class DebugPanel extends JPanel {
 
