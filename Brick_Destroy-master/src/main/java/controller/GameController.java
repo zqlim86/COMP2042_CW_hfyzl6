@@ -20,9 +20,9 @@ package main.java.controller;
 import javax.swing.*;
 
 import main.java.view.GameView;
-import main.java.view.HomeMenu;
+import main.java.view.HomeView;
 import main.java.view.InstructMenu;
-import main.java.view.Intro;
+import main.java.view.IntroView;
 import main.java.view.ScoreboardMenu;
 
 import java.awt.*;
@@ -41,10 +41,10 @@ public class GameController extends JFrame implements WindowFocusListener {
     private static final String DEF_TITLE = "Brick Destroy";
 
     private GameView gameBoard;
-    private HomeMenu homeMenu;
+    private HomeView homeMenu;
     private InstructMenu instructMenu;
     private ScoreboardMenu scoreboardMenu;
-    private Intro intro;
+    private IntroView intro;
 
     private boolean gaming;
 
@@ -66,9 +66,9 @@ public class GameController extends JFrame implements WindowFocusListener {
         
         scoreboardMenu = new ScoreboardMenu(this, new Dimension(450,600));
 
-        homeMenu = new HomeMenu(this,new Dimension(450,300));
+        homeMenu = new HomeView(this,new Dimension(450,300));
         
-        intro = new Intro(this, new Dimension(500,400));
+        intro = new IntroView(this, new Dimension(500,400));
         
         this.add(intro,BorderLayout.CENTER);
         

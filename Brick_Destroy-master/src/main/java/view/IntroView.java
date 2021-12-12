@@ -14,7 +14,7 @@ import java.awt.geom.Rectangle2D;
 /**
  * Intro class is the class for the implementation of the starting page when the game begins.
  */
-public class Intro extends JComponent implements KeyListener {
+public class IntroView extends JComponent implements KeyListener {
 	
 	private Rectangle introFace;
 	private GameController frame;
@@ -31,7 +31,7 @@ public class Intro extends JComponent implements KeyListener {
 	 * @param owner		GameFrame
 	 * @param area		area Dimension size for Intro
 	 */
-	public Intro(GameController owner, Dimension area) {
+	public IntroView(GameController owner, Dimension area) {
 		
 			BackgroundMusic.init();
 			BackgroundMusic.load("/resources/Intro.mp3", "Intro");

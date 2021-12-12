@@ -34,7 +34,7 @@ import java.awt.geom.Rectangle2D;
  * HomeMenu class comes after Intro class.
  * Displays the Game Title, Start, Instruction, Scoreboard, Exit;
  */
-public class HomeMenu extends JComponent implements MouseListener, MouseMotionListener {
+public class HomeView extends JComponent implements MouseListener, MouseMotionListener {
 	
     private static final String GAME_TITLE = "BRICK DESTROY";
     private static final String CREDITS = "Version Beta";
@@ -82,7 +82,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
      * @param owner GameFrame
      * @param area Dimension size for HomeMenu
      */
-    public HomeMenu(GameController owner,Dimension area){
+    public HomeView(GameController owner,Dimension area){
     	
     	BackgroundMusic.init();
         this.setFocusable(true);
