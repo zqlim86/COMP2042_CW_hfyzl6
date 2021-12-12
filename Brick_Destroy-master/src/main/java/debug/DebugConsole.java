@@ -19,9 +19,9 @@ package main.java.debug;
 
 import javax.swing.*;
 
-import main.java.controller.GameBoard;
 import main.java.model.Ball;
-import main.java.model.Wall;
+import main.java.model.GameModel;
+import main.java.view.GameView;
 
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -38,8 +38,8 @@ public class DebugConsole extends JDialog implements WindowListener{
 
     private JFrame owner;
     private DebugPanel debugPanel;
-    private GameBoard gameBoard;
-    private Wall wall;
+    private GameView gameBoard;
+    private GameModel wall;
 
 
     /**
@@ -48,7 +48,7 @@ public class DebugConsole extends JDialog implements WindowListener{
      * @param wall Game's logic.
      * @param gameBoard Game's controller.
      */
-    public DebugConsole(JFrame owner,Wall wall,GameBoard gameBoard){
+    public DebugConsole(JFrame owner,GameModel wall,GameView gameBoard){
     	
         this.wall = wall;
         this.owner = owner;

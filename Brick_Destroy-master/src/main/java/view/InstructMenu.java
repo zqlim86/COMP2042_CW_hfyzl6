@@ -2,7 +2,7 @@ package main.java.view;
 
 import javax.swing.*;
 
-import main.java.controller.GameFrame;
+import main.java.controller.GameController;
 import main.java.model.BackgroundMusic;
 
 import java.awt.*;
@@ -43,7 +43,7 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	    private Rectangle menuFace;
 	    private Rectangle backButton;
 
-	    private GameFrame owner;
+	    private GameController owner;
 
 	    private Font buttonFont;
 	    Image icon = new ImageIcon(getClass().getResource("/resources/galaxy1.gif")).getImage();
@@ -60,7 +60,7 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	     * @param owner
 	     * @param area
 	     */
-	    public InstructMenu(GameFrame owner, Dimension area){
+	    public InstructMenu(GameController owner, Dimension area){
 	    	
 	    	BackgroundMusic.init();
 	    	BackgroundMusic.load("/resources/ButtonEffect.mp3", "ButtonEffect");

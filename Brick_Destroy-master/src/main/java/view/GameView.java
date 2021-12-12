@@ -15,10 +15,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package main.java.controller;
+package main.java.view;
 
 import javax.swing.*;
 
+import main.java.controller.GameController;
+import main.java.controller.TextFileController;
 import main.java.debug.DebugConsole;
 import main.java.model.BackgroundMusic;
 import main.java.model.Ball;
@@ -26,7 +28,7 @@ import main.java.model.Brick;
 import main.java.model.FirePowerup;
 import main.java.model.Player;
 import main.java.model.PlayerPowerup;
-import main.java.model.Wall;
+import main.java.model.GameModel;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -38,7 +40,7 @@ import java.io.IOException;
  *
  */
 
-public class GameBoard extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
+public class GameView extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
 
     private static final String CONTINUE = "Continue";
     private static final String RESTART = "Restart";
@@ -53,7 +55,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     private Timer gameTimer;
 
-    private Wall wall;
+    private GameModel wall;
 
     private String message;
 
@@ -65,29 +67,29 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Rectangle exitButtonRect;
     private Rectangle restartButtonRect;
     private int strLen; 
-    private GameFrame owner;
+    private GameController owner;
 
     private DebugConsole debugConsole;
     Image icon = new ImageIcon(getClass().getResource("/resources/galaxy2.gif")).getImage();
 
 
-    public GameBoard(JFrame owner){
+    public GameView(JFrame owner){
         super();
 
-        BackgroundMusic.init();
-    	BackgroundMusic.load("/resources/ButtonEffect.mp3", "ButtonEffect");
+        //BackgroundMusic.init();
+    	//BackgroundMusic.load("/resources/ButtonEffect.mp3", "ButtonEffect");
         
         strLen = 0;
         showPauseMenu = false;
 
-        this.owner = (GameFrame) owner;
+        this.owner = (GameController) owner;
 
         menuFont = new Font("Monospaced",Font.PLAIN,TEXT_SIZE);
 
  
         this.initialize(); 
         message = "";
-        wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
+        wall = new GameModel(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
 
         debugConsole = new DebugConsole(owner,wall,this);
         //initialize the first level
@@ -96,10 +98,6 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         gameTimer = new Timer(10,e ->{
             wall.move();
             wall.findImpacts();
-            if(wall.player.width>150) {
-            	
-            }
-            
             
             message = String.format("Bricks: %d Balls: %d Score: %d",wall.getBrickCount(),wall.getBallCount(),wall.getScoreCount()); //Add Score View
             if(wall.isBallLost()){
@@ -147,7 +145,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
 
     /**
-     * Initialize GameBoard as JComponent with DEF_WIDTH and DEF_HEIGHT, also adding key,mouse,mouseMotion Listener as well.
+     * Initialize GameView as JComponent with DEF_WIDTH and DEF_HEIGHT, also adding key,mouse,mouseMotion Listener as well.
      */
     private void initialize(){
         this.setPreferredSize(new Dimension(DEF_WIDTH,DEF_HEIGHT));
@@ -161,7 +159,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     /**
      * paint is an Overridden Method from the JComponent class.
-     * paint method is to draw the gameboard.
+     * paint method is to draw the GameView.
      * This method will draw the ball, player wall and pause screen in the game-screen.
      * @param g Graphic.
      */

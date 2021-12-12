@@ -19,6 +19,7 @@ package main.java.controller;
 
 import javax.swing.*;
 
+import main.java.view.GameView;
 import main.java.view.HomeMenu;
 import main.java.view.InstructMenu;
 import main.java.view.Intro;
@@ -33,13 +34,13 @@ import java.io.IOException;
 
 
 /**
- *GameFrame is responsible for implementation of GameFrame window.
+ *GameController is responsible for implementation of GameController window.
  */
-public class GameFrame extends JFrame implements WindowFocusListener {
+public class GameController extends JFrame implements WindowFocusListener {
 
     private static final String DEF_TITLE = "Brick Destroy";
 
-    private GameBoard gameBoard;
+    private GameView gameBoard;
     private HomeMenu homeMenu;
     private InstructMenu instructMenu;
     private ScoreboardMenu scoreboardMenu;
@@ -50,16 +51,16 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     
     
     /**
-     * GameFrame is a constructor that add the Intro Page to the game frame.
+     * GameController is a constructor that add the Intro Page to the game frame.
      */
-    public GameFrame() throws IOException{
+    public GameController() throws IOException{
         super();
 
         gaming = false;
 
         this.setLayout(new BorderLayout());
 
-        gameBoard = new GameBoard(this);
+        gameBoard = new GameView(this);
         
         instructMenu = new InstructMenu(this, new Dimension(450,350));
         
@@ -77,7 +78,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     }
 
     /**
-     * Initialize GameFrame with a Title.
+     * Initialize GameController with a Title.
      */
     public void initialize(){
         this.setTitle(DEF_TITLE);
@@ -154,7 +155,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     
     
     /**
-     * Set the location of gameFrame relative to screenSize.
+     * Set the location of GameController relative to screenSize.
      */
     private void autoLocate(){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -165,7 +166,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     
     /**
-     * If gameFrame is in use, set gaming to true.
+     * If GameController is in use, set gaming to true.
      * 
      * @param windowEvent Window's status.
      */
@@ -183,7 +184,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     }
 
     /**
-     * If gameFrame is not in use but gaming is still true,
+     * If GameController is not in use but gaming is still true,
      * stop timer and display "Focus Lost" on screen
      * 
      * @param windowEvent Window's status.

@@ -2,7 +2,7 @@ package main.java.view;
 
 import javax.swing.*;
 
-import main.java.controller.GameFrame;
+import main.java.controller.GameController;
 import main.java.model.BackgroundMusic;
 
 import java.awt.*;
@@ -17,7 +17,7 @@ import java.awt.geom.Rectangle2D;
 public class Intro extends JComponent implements KeyListener {
 	
 	private Rectangle introFace;
-	private GameFrame frame;
+	private GameController frame;
 	private static final String CONTINUE = "HIT ENTER TO CONTINUE...";
     private static final Color TEXT_COLOR = Color.WHITE.darker().darker(); 
     private Font textFont;
@@ -31,7 +31,7 @@ public class Intro extends JComponent implements KeyListener {
 	 * @param owner		GameFrame
 	 * @param area		area Dimension size for Intro
 	 */
-	public Intro(GameFrame owner, Dimension area) {
+	public Intro(GameController owner, Dimension area) {
 		
 			BackgroundMusic.init();
 			BackgroundMusic.load("/resources/Intro.mp3", "Intro");

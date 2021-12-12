@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 
-import main.java.controller.GameFrame;
+import main.java.controller.GameController;
 import main.java.controller.TextFileController;
 import main.java.model.BackgroundMusic;
 
@@ -46,7 +46,7 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	    private Rectangle menuFace;
 	    private Rectangle backButton;
 
-	    private GameFrame owner;
+	    private GameController owner;
 
 	    private Font buttonFont;
 	    Image icon = new ImageIcon(getClass().getResource("/resources/galaxy1.gif")).getImage();
@@ -62,7 +62,7 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	     * @param owner
 	     * @param area
 	     */
-	    public ScoreboardMenu(GameFrame owner, Dimension area) throws IOException {
+	    public ScoreboardMenu(GameController owner, Dimension area) throws IOException {
 	    	
 	    	BackgroundMusic.init();
 	    	BackgroundMusic.load("/resources/ButtonEffect.mp3", "ButtonEffect");

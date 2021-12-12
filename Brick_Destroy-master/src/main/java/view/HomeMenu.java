@@ -19,7 +19,7 @@ package main.java.view;
 
 import javax.swing.*;
 
-import main.java.controller.GameFrame;
+import main.java.controller.GameController;
 import main.java.model.BackgroundMusic;
 
 import java.awt.*;
@@ -66,7 +66,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private Font creditsFont;
     private Font buttonFont;
 
-    private GameFrame owner;
+    private GameController owner;
  
     private boolean startClicked;
     private boolean instructClicked;
@@ -82,7 +82,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
      * @param owner GameFrame
      * @param area Dimension size for HomeMenu
      */
-    public HomeMenu(GameFrame owner,Dimension area){
+    public HomeMenu(GameController owner,Dimension area){
     	
     	BackgroundMusic.init();
         this.setFocusable(true);

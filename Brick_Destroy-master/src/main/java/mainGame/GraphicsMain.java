@@ -20,7 +20,7 @@ package main.java.mainGame;
 import java.awt.*;
 import java.io.IOException;
 
-import main.java.controller.GameFrame;
+import main.java.controller.GameController;
 
 /**
  * A Brick Breaker Game!
@@ -35,7 +35,7 @@ public class GraphicsMain {
     public static void main(String[] args){
         EventQueue.invokeLater(() -> {
             try {
-                new GameFrame().initialize();
+                new GameController().initialize();
             } catch (IOException e) {
                 e.printStackTrace();
             }

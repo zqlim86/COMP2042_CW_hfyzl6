@@ -20,7 +20,7 @@ package main.java.debug;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
-import main.java.model.Wall;
+import main.java.model.GameModel;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -42,13 +42,13 @@ public class DebugPanel extends JPanel {
     private JSlider ballXSpeed;
     private JSlider ballYSpeed;
 
-    private Wall wall;
+    private GameModel wall;
 
     /**
      * DebugPanel Constructor that makes 2 Buttons and Sliders for player to choose levels and reset their ball chance.
      * @param wall
      */
-    public DebugPanel(Wall wall){
+    public DebugPanel(GameModel wall){
 
         this.wall = wall;
 
