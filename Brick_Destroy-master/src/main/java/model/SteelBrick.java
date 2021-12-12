@@ -57,7 +57,7 @@ public class SteelBrick extends Brick {
      * @param size		brick size
      */
     @Override
-    protected Shape makeBrickFace(Point pos, Dimension size) {
+	public Shape makeBrickFace(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
     
