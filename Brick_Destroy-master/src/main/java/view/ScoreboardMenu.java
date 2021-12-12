@@ -65,7 +65,7 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	    public ScoreboardMenu(GameFrame owner, Dimension area) throws IOException {
 	    	
 	    	BackgroundMusic.init();
-	    	BackgroundMusic.load("/SFX/ButtonEffect.mp3", "ButtonEffect");
+	    	BackgroundMusic.load("/resources/ButtonEffect.mp3", "ButtonEffect");
 	    	
 	    	nameMessage = displayNames();
 	    	scoreMessage = displayScores();

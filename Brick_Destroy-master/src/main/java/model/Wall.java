@@ -313,11 +313,11 @@ public class Wall {
      * Implements when ball makes impact with the game frame/border.
      */
     public void findImpacts(){
-    	BackgroundMusic.load("/SFX/BrickBounce.mp3", "BrickBounce");
+    	BackgroundMusic.load("/resources/BrickBounce.mp3", "BrickBounce");
     	BackgroundMusic.setVolume("BrickBounce",-25);
-    	BackgroundMusic.load("/SFX/Powerup1.mp3", "Powerup1");
+    	BackgroundMusic.load("/resources/Powerup1.mp3", "Powerup1");
     	BackgroundMusic.setVolume("Powerup1",-15);
-    	BackgroundMusic.load("/SFX/Powerup2.mp3", "Powerup2");
+    	BackgroundMusic.load("/resources/Powerup2.mp3", "Powerup2");
     	BackgroundMusic.setVolume("Powerup2",-15);
         if(player.impact(ball)){
             ball.reverseY();

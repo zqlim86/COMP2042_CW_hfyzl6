@@ -34,7 +34,7 @@ public class Intro extends JComponent implements KeyListener {
 	public Intro(GameFrame owner, Dimension area) {
 		
 			BackgroundMusic.init();
-			BackgroundMusic.load("/SFX/Intro.mp3", "Intro");
+			BackgroundMusic.load("/resources/Intro.mp3", "Intro");
 			BackgroundMusic.loop("Intro");
 		
  	        this.setFocusable(true);
@@ -138,8 +138,8 @@ public class Intro extends JComponent implements KeyListener {
 		 switch(keyEvent.getKeyCode()){
 		 	case KeyEvent.VK_ENTER :
 		 		BackgroundMusic.stop("Intro");
-		    	BackgroundMusic.load("/SFX/MenuMusic.mp3", "MenuMusic");
-		    	BackgroundMusic.load("/SFX/ButtonEffect.mp3", "ButtonEffect");
+		    	BackgroundMusic.load("/resources/MenuMusic.mp3", "MenuMusic");
+		    	BackgroundMusic.load("/resources/ButtonEffect.mp3", "ButtonEffect");
 		    	BackgroundMusic.setVolume("MenuMusic",-15);
 		    	BackgroundMusic.loop("MenuMusic", 1000, 1000, BackgroundMusic.getFrames("MenuMusic") - 1000);
 		 		frame.enableHomeMenu();

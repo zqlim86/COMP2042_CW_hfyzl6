@@ -63,7 +63,7 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	    public InstructMenu(GameFrame owner, Dimension area){
 	    	
 	    	BackgroundMusic.init();
-	    	BackgroundMusic.load("/SFX/ButtonEffect.mp3", "ButtonEffect");
+	    	BackgroundMusic.load("/resources/ButtonEffect.mp3", "ButtonEffect");
 	        this.setFocusable(true);
 	        this.requestFocusInWindow();
 

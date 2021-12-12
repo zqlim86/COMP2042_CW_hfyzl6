@@ -75,7 +75,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         super();
 
         BackgroundMusic.init();
-    	BackgroundMusic.load("/SFX/ButtonEffect.mp3", "ButtonEffect");
+    	BackgroundMusic.load("/resources/ButtonEffect.mp3", "ButtonEffect");
         
         strLen = 0;
         showPauseMenu = false;

@@ -354,7 +354,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         if(startButton.contains(p)){
         	BackgroundMusic.play("ButtonEffect");
         	BackgroundMusic.stop("MenuMusic");
-        	BackgroundMusic.load("/SFX/GameTheme.mp3", "GameTheme");
+        	BackgroundMusic.load("/resources/GameTheme.mp3", "GameTheme");
         	BackgroundMusic.setVolume("GameTheme", -20);
         	BackgroundMusic.loop("GameTheme");
         	owner.enableGameBoard();
