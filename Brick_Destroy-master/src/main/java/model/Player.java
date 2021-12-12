@@ -38,7 +38,7 @@ public class Player {
     private int moveAmount;
     private int min;
     private int max;
-    public int width = 150;
+    public int width = 155;
 
     /**
      * Constructor of Player class

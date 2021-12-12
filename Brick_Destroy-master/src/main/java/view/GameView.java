@@ -110,6 +110,7 @@ public class GameView extends JComponent implements KeyListener,MouseListener,Mo
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+                    wall.resetScoreCount();
                 }
                 wall.ballReset();
                 gameTimer.stop();
@@ -130,6 +131,7 @@ public class GameView extends JComponent implements KeyListener,MouseListener,Mo
 						e1.printStackTrace();
 					}
                     gameTimer.stop();
+                    wall.resetScoreCount();
                 }
             }
 

@@ -149,7 +149,7 @@ public class GameModel {
         	if(player.getWidth()<230){
 	        	if(pPowerCount == false) {
 	            	BackgroundMusic.play("Powerup2");
-	        		player.setWidth(20);
+	        		player.setWidth(15);
 	        		pPowerCount = true;
 	        	}
         	}
@@ -258,6 +258,15 @@ public class GameModel {
      * @return  returns the scoreCount.
      */
     public int getScoreCount() {
+    	return scoreCount;
+    }
+    
+    /**
+     * resetScoreCount is to reset the score after player lost the game.
+     * @return  returns the scoreCount.
+     */
+    public int resetScoreCount() {
+    	scoreCount = 0;
     	return scoreCount;
     }
     
