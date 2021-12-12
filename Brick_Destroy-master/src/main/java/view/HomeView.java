@@ -117,7 +117,7 @@ public class HomeView extends JComponent implements MouseListener, MouseMotionLi
      * paint is an Overridden Method from the JComponent class.
      * Method to invoke the painting of the HomeMenu page.
      * Calls the drawMenu method.
-     * @param g
+     * @param g		Graphics
      */
     public void paint(Graphics g){
         drawMenu((Graphics2D)g);

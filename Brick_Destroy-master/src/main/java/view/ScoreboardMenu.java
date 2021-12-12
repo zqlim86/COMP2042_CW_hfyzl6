@@ -59,8 +59,9 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	     * Set the font style and size.
 	     * Set the back button's dimension.
 	     * 
-	     * @param owner
-	     * @param area
+	     * @param owner		GameController
+	     * @param area		Area
+	     * @throws 			IOException for TextFileController
 	     */
 	    public ScoreboardMenu(GameController owner, Dimension area) throws IOException {
 	    	
@@ -97,7 +98,7 @@ public class ScoreboardMenu extends JComponent implements MouseListener, MouseMo
 	     * paint is an Overridden Method from the JComponent class.
 	     * Method to invoke the painting of the ScoreboardMenu page.
 	     * Calls the drawMenu method.
-	     * @param g
+	     * @param g 	Graphics.
 	     */
 	    public void paint(Graphics g){
 	        drawMenu((Graphics2D)g);

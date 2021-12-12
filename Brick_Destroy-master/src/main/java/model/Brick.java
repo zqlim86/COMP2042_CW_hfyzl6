@@ -53,8 +53,8 @@ abstract public class Brick  {
          * Sets a randomly generated path from the point of impact.
          * Sets the depth of the crack.
          * Sets the crack steps.
-         * @param crackDepth
-         * @param steps
+         * @param crackDepth		Integer value for crackDepth.
+         * @param steps				Integer value for steps.
          */
         public Crack(int crackDepth, int steps){
 
@@ -307,7 +307,7 @@ abstract public class Brick  {
     /**
      * findImpact method is to determine the direction of impact from the ball to the brick.
      * @param b		ball
-     * @return		
+     * @return		Integer value for out.
      */
     public final int findImpact(Ball b){
         if(broken)

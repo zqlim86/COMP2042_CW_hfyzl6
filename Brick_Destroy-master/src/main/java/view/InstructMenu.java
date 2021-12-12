@@ -57,8 +57,8 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	     * Set the font style and size.
 	     * Set the back button's dimension.
 	     * 
-	     * @param owner
-	     * @param area
+	     * @param owner		GameController
+	     * @param area		Dimension
 	     */
 	    public InstructMenu(GameController owner, Dimension area){
 	    	
@@ -92,7 +92,7 @@ public class InstructMenu extends JComponent implements MouseListener, MouseMoti
 	     * paint is an Overridden Method from the JComponent class.
 	     * Method to invoke the painting of the InstructMenu page.
 	     * Calls the drawMenu method.
-	     * @param g
+	     * @param g		Graphics
 	     */
 	    public void paint(Graphics g){
 	        drawMenu((Graphics2D)g);

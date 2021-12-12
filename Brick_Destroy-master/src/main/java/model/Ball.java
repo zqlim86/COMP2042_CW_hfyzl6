@@ -212,7 +212,7 @@ abstract public class Ball {
     /**
      * moveTo method will implements the ball shape and location when ball resets.
      * 
-     * @param p
+     * @param p		Point.
      */
     public void moveTo(Point p){
         center.setLocation(p);

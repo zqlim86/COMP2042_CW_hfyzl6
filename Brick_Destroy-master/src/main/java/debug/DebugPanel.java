@@ -45,7 +45,7 @@ public class DebugPanel extends JPanel {
 
     /**
      * DebugPanel Constructor that makes 2 Buttons and Sliders for player to choose levels and reset their ball chance.
-     * @param wall
+     * @param wall		GameModel
      */
     public DebugPanel(GameModel wall){
 

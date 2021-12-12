@@ -33,8 +33,8 @@ public class BackgroundMusic {
 	 * Loads up audio located at path "s" and stores
 	 * it in the HashMap with key "n".
 	 * 
-	 * @param s
-	 * @param n
+	 * @param s		Source of the music
+	 * @param n		Name for the music
 	 */
 	public static void load(String s, String n) {
 		if(clips.get(n) != null) return;
@@ -67,7 +67,7 @@ public class BackgroundMusic {
 	/**
 	 * Play the music loaded.
 	 * 
-	 * @param s
+	 * @param s 	Name for the music
 	 */
 	public static void play(String s) {
 		play(s, gap);
@@ -76,8 +76,8 @@ public class BackgroundMusic {
 	/**
 	 * Play the music with time limit.
 	 * 
-	 * @param s
-	 * @param i
+	 * @param s		Name of the music.
+	 * @param i		Integer value for duration to play.
 	 */
 	public static void play(String s, int i) {
 		Clip c = clips.get(s);
@@ -90,7 +90,7 @@ public class BackgroundMusic {
 	/**
 	 * Stop the music playing.
 	 * 
-	 * @param s
+	 * @param s		Name of the music.
 	 */
 	public static void stop(String s) {
 		if(clips.get(s) == null) return;
@@ -100,7 +100,7 @@ public class BackgroundMusic {
 	/**
 	 * Resume the music.
 	 * 
-	 * @param s
+	 * @param s		Name of the music.
 	 */
 	public static void resume(String s) {
 		if(clips.get(s).isRunning()) return;
@@ -110,7 +110,7 @@ public class BackgroundMusic {
 	/**
 	 * Resume the looped music.
 	 * 
-	 * @param s
+	 * @param s		Name of the music.
 	 */
 	public static void resumeLoop(String s) {
 		Clip c = clips.get(s);
@@ -121,7 +121,7 @@ public class BackgroundMusic {
 	/**
 	 * Loop the music loaded.
 	 * 
-	 * @param s
+	 * @param s		Name of the music.
 	 */
 	public static void loop(String s) {
 		loop(s, gap, gap, clips.get(s).getFrameLength() - 1);
@@ -130,8 +130,8 @@ public class BackgroundMusic {
 	/**
 	 * Loop the music with frame set.
 	 * 
-	 * @param s
-	 * @param frame
+	 * @param s			Name of the music.
+	 * @param frame		Integer value for frame.
 	 */
 	public static void loop(String s, int frame) {
 		loop(s, frame, gap, clips.get(s).getFrameLength() - 1);
@@ -140,9 +140,9 @@ public class BackgroundMusic {
 	/**
 	 * Loop the music with start and end time.
 	 * 
-	 * @param s
-	 * @param start
-	 * @param end
+	 * @param s			Name of the music.
+	 * @param start		Start music time.
+	 * @param end		End music time.
 	 */
 	public static void loop(String s, int start, int end) {
 		loop(s, gap, start, end);
@@ -151,10 +151,10 @@ public class BackgroundMusic {
 	/**
 	 * Loop the music with frame, start and end.
 	 * 
-	 * @param s
-	 * @param frame
-	 * @param start
-	 * @param end
+	 * @param s			Name of the music.
+	 * @param frame		Integer value for frame.
+	 * @param start		Start music time.
+	 * @param end		End music time.
 	 */
 	public static void loop(String s, int frame, int start, int end) {
 		Clip c = clips.get(s);
@@ -180,8 +180,8 @@ public class BackgroundMusic {
 	/**
 	 * Set the volume of the music loaded.
 	 * 
-	 * @param s
-	 * @param f
+	 * @param s		Name of the music.
+	 * @param f		Integer value for music's volume.
 	 */
 	public static void setVolume(String s, float f) {
 		Clip c = clips.get(s);

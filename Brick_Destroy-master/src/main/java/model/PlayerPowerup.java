@@ -55,8 +55,8 @@ public class PlayerPowerup extends Powerup {
     /**
      * makePowerup will return a rectangle shape for the player powerup.
      * 
-     * @param center
-     * @return
+     * @param center	Point.
+     * @return			New rectangle shape with the value of x,y,25,25.
      */
     public Shape makePowerup(Point2D center){
         double x = center.getX();

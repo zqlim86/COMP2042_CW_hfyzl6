@@ -52,6 +52,7 @@ public class GameController extends JFrame implements WindowFocusListener {
     
     /**
      * GameController is a constructor that add the Intro Page to the game frame.
+     * @throws IOException		For TextFileController
      */
     public GameController() throws IOException{
         super();

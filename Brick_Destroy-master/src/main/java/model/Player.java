@@ -45,7 +45,6 @@ public class Player {
      * initialize and set value for ballpoint, moveAmount, playerFace, min, max
      *
      * @param ballPoint Position of the ball (which is always the startPoint (300, 430))
-     * @param width Width of player paddle
      * @param height Height of player paddle
      * @param container Rectangle GameFrame where game is rendered/drawn
      */
@@ -127,6 +126,8 @@ public class Player {
     
     /**
      * get width of player paddle.
+     * 
+     * @return width.
      */
     public int getWidth() {
     	return width;
@@ -134,6 +135,8 @@ public class Player {
     
     /**
      * set width of player paddle.
+     * 
+     * @param newWidth	Integer value for setting new width.
      */
     public void setWidth(int newWidth) {
     	width += newWidth;

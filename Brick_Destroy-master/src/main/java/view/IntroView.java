@@ -56,7 +56,7 @@ public class IntroView extends JComponent implements KeyListener {
      * paint is an Overridden Method from the JComponent class.
      * Method to invoke the painting of the Intro page.
      * Calls the drawMenu method.
-     * @param g
+     * @param g		Graphics
      */
     public void paint(Graphics g){
         drawIntro((Graphics2D)g);

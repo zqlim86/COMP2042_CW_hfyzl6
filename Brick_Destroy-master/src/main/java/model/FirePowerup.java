@@ -57,8 +57,8 @@ public class FirePowerup extends Powerup{
     /**
      * makePowerup will return a rectangle shape for the fire powerup.
      * 
-     * @param center
-     * @return
+     * @param center	Point.
+     * @return			Rectangle shape with x,y,25,25 value.
      */
     public Shape makePowerup(Point2D center){
         double x = center.getX();
