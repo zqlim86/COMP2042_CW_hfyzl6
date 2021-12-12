@@ -1,9 +1,9 @@
-package test.View;
+package main.java.view;
 
 import javax.swing.*;
 
-import test.Controller.GameFrame;
-import test.Model.BackgroundMusic;
+import main.java.controller.GameFrame;
+import main.java.model.BackgroundMusic;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

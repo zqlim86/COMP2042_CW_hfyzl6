@@ -1,4 +1,4 @@
-package test.Controller;
+package main.java.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -15,14 +15,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package test.Controller;
+package main.java.controller;
 
 import javax.swing.*;
 
-import test.View.HomeMenu;
-import test.View.InstructMenu;
-import test.View.Intro;
-import test.View.ScoreboardMenu;
+import main.java.view.HomeMenu;
+import main.java.view.InstructMenu;
+import main.java.view.Intro;
+import main.java.view.ScoreboardMenu;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;

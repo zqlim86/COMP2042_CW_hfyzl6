@@ -1,4 +1,4 @@
-package test.Model;
+package main.java.model;
 
 import java.awt.Color;
 import java.awt.Image;

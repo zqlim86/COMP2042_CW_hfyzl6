@@ -15,12 +15,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package test;
+package main.java.mainGame;
 
 import java.awt.*;
 import java.io.IOException;
 
-import test.Controller.GameFrame;
+import main.java.controller.GameFrame;
 
 /**
  * A Brick Breaker Game!

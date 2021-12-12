@@ -15,22 +15,23 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package test.Controller;
+package main.java.controller;
 
 import javax.swing.*;
+
+import main.java.debug.DebugConsole;
+import main.java.model.BackgroundMusic;
+import main.java.model.Ball;
+import main.java.model.Brick;
+import main.java.model.FirePowerup;
+import main.java.model.Player;
+import main.java.model.PlayerPowerup;
+import main.java.model.Wall;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.FontRenderContext;
 import java.io.IOException;
-
-import test.Debug.DebugConsole;
-import test.Model.BackgroundMusic;
-import test.Model.Ball;
-import test.Model.Brick;
-import test.Model.FirePowerup;
-import test.Model.Player;
-import test.Model.PlayerPowerup;
-import test.Model.Wall;
 
 /**
  * @author ziqin

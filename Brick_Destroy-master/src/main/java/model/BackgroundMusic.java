@@ -1,5 +1,5 @@
 
-package test.Model;
+package main.java.model;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
