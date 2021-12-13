@@ -443,6 +443,8 @@ public class GameView extends JComponent implements KeyListener,MouseListener,Mo
         	BackgroundMusic.play("ButtonEffect");
             message = "Restarting Game...";
             wall.ballReset();
+            wall.resetScoreCount();
+            wall.player.width = 155;
             wall.wallReset();
             showPauseMenu = false;
             repaint();
