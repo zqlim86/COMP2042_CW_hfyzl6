@@ -95,7 +95,8 @@ public class GameView extends JComponent implements KeyListener, MouseListener, 
 					wall.getScoreCount()); // Add Score View
 			if (wall.isBallLost()) {
 				if (wall.ballEnd()) {
-
+					
+					
 					wall.wallReset();
 					message = "Game over. Score:" + wall.getScoreCount();
 
@@ -107,9 +108,10 @@ public class GameView extends JComponent implements KeyListener, MouseListener, 
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+					wall.player.resetWidth(155);
+					wall.resetScoreCount();
 				}
-				wall.player.resetWidth(155);
-				wall.resetScoreCount();
+
 				wall.ballReset();
 				gameTimer.stop();
 			} else if (wall.isDone()) {
