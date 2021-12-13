@@ -31,7 +31,7 @@ public class LevelModel {
 		tmp[1] = makeChessboardLevel(drawArea, 40, 4, brickDimensionRatio, CLAY, CEMENT);
 		tmp[2] = makeChessboardLevel(drawArea, 50, 5, brickDimensionRatio, STEEL, CEMENT);
 		tmp[3] = makeStripesLevel(drawArea, 60, 6, brickDimensionRatio, CLAY, STEEL, CEMENT);
-		tmp[3] = makeStripesLevel(drawArea, 70, 7, brickDimensionRatio, CEMENT, STEEL, CEMENT);
+		tmp[4] = makeStripesLevel(drawArea, 70, 7, brickDimensionRatio, CEMENT, STEEL, CEMENT);
 
 		return tmp;
 	}
