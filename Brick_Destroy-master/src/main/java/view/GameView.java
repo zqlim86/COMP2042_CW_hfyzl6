@@ -110,8 +110,9 @@ public class GameView extends JComponent implements KeyListener,MouseListener,Mo
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
-                    wall.resetScoreCount();
                 }
+                wall.player.resetWidth(155);
+                wall.resetScoreCount();
                 wall.ballReset();
                 gameTimer.stop();
             }
@@ -125,11 +126,17 @@ public class GameView extends JComponent implements KeyListener,MouseListener,Mo
                 }
                 else{
                     message = "ALL WALLS DESTROYED! Score:" + wall.getScoreCount();
+                    
+                    String name = JOptionPane.showInputDialog("Please Enter Your Name:");
+                    
                     try {
+                    	TextFileController.nAppendToFile(name);
 						TextFileController.appendToFile(wall.getScoreCount());
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+                    wall.player.resetWidth(155);
+                    wall.ballReset();
                     gameTimer.stop();
                     wall.resetScoreCount();
                 }

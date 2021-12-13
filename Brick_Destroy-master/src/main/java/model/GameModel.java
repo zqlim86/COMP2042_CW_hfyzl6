@@ -175,6 +175,9 @@ public class GameModel {
         }
         else if(ball.getPosition().getY() > area.getY() + area.getHeight()){
             ballCount--;
+            scoreCount -= 5;
+            player.punishWidth(15);
+            System.out.println(player.width);
             ballLost = true;
         }
     }

@@ -143,6 +143,28 @@ public class Player {
     	playerFace= makeRectangle(width,10);
     	
     }
+    
+    /**
+     * decrease width of player paddle.
+     * 
+     * @param newWidth	Integer value for setting new width.
+     */
+    public void punishWidth(int newWidth) {
+    	width -= newWidth;
+    	playerFace = makeRectangle(width,10);
+    	
+    }
+    
+    /**
+     * reset width of player paddle.
+     * 
+     * @param newWidth	Integer value for setting new width.
+     */
+    public void resetWidth(int newWidth) {
+    	width = 155; 
+    	playerFace = makeRectangle(width,10);
+    	
+    }
 
     /**
      * getter for player paddle
