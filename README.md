@@ -30,7 +30,7 @@ Project Description: A space theme brick breaker game!
 # Additions to the game!
 
 ### 1. Added Intro before going into the menu.
-   ![Intro](/Users/ziqin/Desktop/IntroView.png)
+   ![Intro](/Images/IntroView.png)
 
 ### 2. Added Instruction & Scoreboard button in home menu.
-	![HomeMenu](/Users/ziqin/Desktop/MenuView.png)
+	![HomeMenu](/Images/MenuView.png)
