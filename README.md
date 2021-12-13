@@ -57,7 +57,9 @@ Project Description: A space theme brick breaker game!
 
 
 # Github Commit History.
-![GitCommit](/Images/GithubCommits.pdf)
+![GitCommit](/Images/GithubCommits-1.pdf)
+![GitCommit](/Images/GithubCommits-2.pdf)
+![GitCommit](/Images/GithubCommits-3.pdf)
 
 
 
