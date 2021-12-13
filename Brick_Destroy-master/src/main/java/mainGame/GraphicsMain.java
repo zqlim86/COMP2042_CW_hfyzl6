@@ -24,22 +24,24 @@ import main.java.controller.GameController;
 
 /**
  * A Brick Breaker Game!
+ * 
  * @author ziqin
  */
 public class GraphicsMain {
 
-    /**
-     * Main Function to run the Brick Breaker Game.
-     * @param args a string array arguments.
-     */
-    public static void main(String[] args){
-        EventQueue.invokeLater(() -> {
-            try {
-                new GameController().initialize();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }); 
-    }
+	/**
+	 * Main Function to run the Brick Breaker Game.
+	 * 
+	 * @param args a string array arguments.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(() -> {
+			try {
+				new GameController().initialize();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
 
 }

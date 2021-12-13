@@ -25,94 +25,95 @@ import main.java.model.GameModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-
-
 /**
  * DebugPanel class controls the debug panel window.
  */
 public class DebugPanel extends JPanel {
 
-    private static final Color DEF_BKG = Color.WHITE;
+	private static final Color DEF_BKG = Color.WHITE;
 
-    
-    private JButton skipLevel;
-    private JButton resetBalls;
+	private JButton skipLevel;
+	private JButton resetBalls;
 
-    private JSlider ballXSpeed;
-    private JSlider ballYSpeed;
+	private JSlider ballXSpeed;
+	private JSlider ballYSpeed;
 
-    private GameModel wall;
+	private GameModel wall;
 
-    /**
-     * DebugPanel Constructor that makes 2 Buttons and Sliders for player to choose levels and reset their ball chance.
-     * @param wall		GameModel
-     */
-    public DebugPanel(GameModel wall){
+	/**
+	 * DebugPanel Constructor that makes 2 Buttons and Sliders for player to choose
+	 * levels and reset their ball chance.
+	 * 
+	 * @param wall GameModel
+	 */
+	public DebugPanel(GameModel wall) {
 
-        this.wall = wall;
+		this.wall = wall;
 
-        initialize();
+		initialize();
 
-        skipLevel = makeButton("Skip Level",e -> wall.nextLevel());
-        resetBalls = makeButton("Reset Balls",e -> wall.resetBallCount());
+		skipLevel = makeButton("Skip Level", e -> wall.nextLevel());
+		resetBalls = makeButton("Reset Balls", e -> wall.resetBallCount());
 
-        ballXSpeed = makeSlider(-4,4,e -> wall.setBallXSpeed(ballXSpeed.getValue()));
-        ballYSpeed = makeSlider(-4,4,e -> wall.setBallYSpeed(ballYSpeed.getValue()));
+		ballXSpeed = makeSlider(-4, 4, e -> wall.setBallXSpeed(ballXSpeed.getValue()));
+		ballYSpeed = makeSlider(-4, 4, e -> wall.setBallYSpeed(ballYSpeed.getValue()));
 
-        this.add(skipLevel);
-        this.add(resetBalls);
+		this.add(skipLevel);
+		this.add(resetBalls);
 
-        this.add(ballXSpeed);
-        this.add(ballYSpeed);
+		this.add(ballXSpeed);
+		this.add(ballYSpeed);
 
-    }
+	}
 
-    /**
-     * Initialize and set layout of DebugPanel with 2 Buttons and Sliders.
-     */
-    private void initialize(){
-        this.setBackground(DEF_BKG);
-        this.setLayout(new GridLayout(2,2));
-    }
+	/**
+	 * Initialize and set layout of DebugPanel with 2 Buttons and Sliders.
+	 */
+	private void initialize() {
+		this.setBackground(DEF_BKG);
+		this.setLayout(new GridLayout(2, 2));
+	}
 
-    /**
-     * Make Buttons
-     * @param title Button's title
-     * @param e Action event
-     * @return Jbutton
-     */
-    private JButton makeButton(String title, ActionListener e){
-        JButton out = new JButton(title);
-        out.addActionListener(e);
-        return  out;
-    }
+	/**
+	 * Make Buttons
+	 * 
+	 * @param title Button's title
+	 * @param e     Action event
+	 * @return Jbutton
+	 */
+	private JButton makeButton(String title, ActionListener e) {
+		JButton out = new JButton(title);
+		out.addActionListener(e);
+		return out;
+	}
 
-    /**
-     * Make Sliders with min/max values.
-     * 
-     * @param min Minimum value of the slider.
-     * @param max Maximum value of the slider.
-     * @param e Change event.
-     * @return JSlider.
-     */
-    private JSlider makeSlider(int min, int max, ChangeListener e){
-        JSlider out = new JSlider(min,max);
-        out.setMajorTickSpacing(1);
-        out.setSnapToTicks(true);
-        out.setPaintTicks(true);
-        out.addChangeListener(e);
-        return out;
-    }
+	/**
+	 * Make Sliders with min/max values.
+	 * 
+	 * @param min Minimum value of the slider.
+	 * @param max Maximum value of the slider.
+	 * @param e   Change event.
+	 * @return JSlider.
+	 */
+	private JSlider makeSlider(int min, int max, ChangeListener e) {
+		JSlider out = new JSlider(min, max);
+		out.setMajorTickSpacing(1);
+		out.setSnapToTicks(true);
+		out.setPaintTicks(true);
+		out.addChangeListener(e);
+		return out;
+	}
 
-    /**
-     * The Slider is automatically set to the value of the ball when DebugPanel is activated.
-     * 
-     * @param x Ball's X Speed.
-     * @param y Ball's Y Speed.
-     */
-    public void setValues(int x,int y){
-        ballXSpeed.setValue(x);
-        ballYSpeed.setValue(y);
-    }
+	/**
+	 * The Slider is automatically set to the value of the ball when DebugPanel is
+	 * activated.
+	 * 
+	 * @param x Ball's X Speed.
+	 * @param y Ball's Y Speed.
+	 */
+	public void setValues(int x, int y) {
+		ballXSpeed.setValue(x);
+		ballYSpeed.setValue(y);
+	}
 
 }

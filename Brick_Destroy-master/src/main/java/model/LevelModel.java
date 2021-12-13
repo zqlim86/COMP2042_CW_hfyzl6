@@ -4,26 +4,27 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-
 /**
  * LevelModel class is responsible for handling different levels in the game.
  */
 public class LevelModel {
 
-    private static final int CLAY = 1;
-    private static final int STEEL = 2;
-    private static final int CEMENT = 3;
-    private static final int LEVELS_COUNT = 5;
-	
-	
-    /**
-     * makeLevels is a Private Method that creates the GameModel based on the levels.
-     * @param drawArea      a rectangular area for the GameModel.
-     * @param brickCount    the number of bricks.
-     * @param lineCount     the number of rows of bricks on the GameModel.
-     * @param brickDimensionRatio   the brick dimension.
-     * @return      returns a GameModel. Either Single type GameModel or Chessboard GameModel.
-     */
+	private static final int CLAY = 1;
+	private static final int STEEL = 2;
+	private static final int CEMENT = 3;
+	private static final int LEVELS_COUNT = 5;
+
+	/**
+	 * makeLevels is a Private Method that creates the GameModel based on the
+	 * levels.
+	 * 
+	 * @param drawArea            a rectangular area for the GameModel.
+	 * @param brickCount          the number of bricks.
+	 * @param lineCount           the number of rows of bricks on the GameModel.
+	 * @param brickDimensionRatio the brick dimension.
+	 * @return returns a GameModel. Either Single type GameModel or Chessboard
+	 *         GameModel.
+	 */
 	public Brick[][] makeLevel(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio) {
 		Brick[][] tmp = new Brick[LEVELS_COUNT][];
 		tmp[0] = makeSingleTypeLevel(drawArea, brickCount, lineCount, brickDimensionRatio, CLAY);
@@ -34,8 +35,7 @@ public class LevelModel {
 
 		return tmp;
 	}
-    
-    
+
 	/**
 	 * make GameModel of clay bricks for the first level
 	 *
@@ -199,29 +199,29 @@ public class LevelModel {
 		return tmp;
 	}
 
-    /**
-     * make brick based on type.
-     * 
-     * @param point		
-     * @param size
-     * @param type
-     * @return
-     */
-    private Brick makeBrick(Point point, Dimension size, int type){
-        Brick out;
-        switch(type){
-            case CLAY:
-                out = new ClayBrick(point,size);
-                break;
-            case STEEL:
-                out = new SteelBrick(point,size);
-                break;
-            case CEMENT:
-                out = new CementBrick(point, size);
-                break;
-            default:
-                throw  new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
-        }
-        return  out;
-    }
+	/**
+	 * make brick based on type.
+	 * 
+	 * @param point
+	 * @param size
+	 * @param type
+	 * @return
+	 */
+	private Brick makeBrick(Point point, Dimension size, int type) {
+		Brick out;
+		switch (type) {
+		case CLAY:
+			out = new ClayBrick(point, size);
+			break;
+		case STEEL:
+			out = new SteelBrick(point, size);
+			break;
+		case CEMENT:
+			out = new CementBrick(point, size);
+			break;
+		default:
+			throw new IllegalArgumentException(String.format("Unknown Type:%d\n", type));
+		}
+		return out;
+	}
 }

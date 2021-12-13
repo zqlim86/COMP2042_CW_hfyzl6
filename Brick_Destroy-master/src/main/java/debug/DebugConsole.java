@@ -30,98 +30,98 @@ import java.awt.event.WindowListener;
 /**
  * DebugConsole class handles the implementation of Debug Console Window
  */
-public class DebugConsole extends JDialog implements WindowListener{
+public class DebugConsole extends JDialog implements WindowListener {
 
-    private static final String TITLE = "Debug Console";
+	private static final String TITLE = "Debug Console";
 
+	private JFrame owner;
+	private DebugPanel debugPanel;
+	private GameView gameBoard;
+	private GameModel wall;
 
-    private JFrame owner;
-    private DebugPanel debugPanel;
-    private GameView gameBoard;
-    private GameModel wall;
+	/**
+	 * DebugConsole is a constructor that initialize's itself and also set values
+	 * for owner, wall and gameBoard.
+	 * 
+	 * @param owner     Game's window.
+	 * @param wall      Game's logic.
+	 * @param gameBoard Game's controller.
+	 */
+	public DebugConsole(JFrame owner, GameModel wall, GameView gameBoard) {
 
+		this.wall = wall;
+		this.owner = owner;
+		this.gameBoard = gameBoard;
+		initialize();
 
-    /**
-     * DebugConsole is a constructor that initialize's itself and also set values for owner, wall and gameBoard.
-     * @param owner Game's window.
-     * @param wall Game's logic.
-     * @param gameBoard Game's controller.
-     */
-    public DebugConsole(JFrame owner,GameModel wall,GameView gameBoard){
-    	
-        this.wall = wall;
-        this.owner = owner;
-        this.gameBoard = gameBoard;
-        initialize();
+		debugPanel = new DebugPanel(wall);
+		this.add(debugPanel, BorderLayout.CENTER);
 
-        debugPanel = new DebugPanel(wall);
-        this.add(debugPanel,BorderLayout.CENTER);
+		this.pack();
+	}
 
+	/**
+	 * Initialize the DebugConsole.
+	 */
+	private void initialize() {
+		this.setModal(true);
+		this.setTitle(TITLE);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setLayout(new BorderLayout());
+		this.addWindowListener(this);
+		this.setFocusable(true);
+	}
 
-        this.pack();
-    }
+	/**
+	 * Set the location of DebugConsole, which is approximately the middle of the
+	 * window.
+	 */
+	private void setLocation() {
+		int x = ((owner.getWidth() - this.getWidth()) / 2) + owner.getX();
+		int y = ((owner.getHeight() - this.getHeight()) / 2) + owner.getY();
+		this.setLocation(x, y);
+	}
 
-    /**
-     * Initialize the DebugConsole.
-     */
-    private void initialize(){
-        this.setModal(true);
-        this.setTitle(TITLE);
-        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        this.setLayout(new BorderLayout());
-        this.addWindowListener(this);
-        this.setFocusable(true);
-    }
+	/**
+	 * Will set DebugConsole in the middle of the window. The slider is
+	 * automatically set to the value of the ball.
+	 * 
+	 * @param windowEvent is the window's status.
+	 */
+	@Override
+	public void windowActivated(WindowEvent windowEvent) {
+		setLocation();
+		Ball b = wall.ball;
+		debugPanel.setValues(b.getSpeedX(), b.getSpeedY());
+	}
 
+	@Override
+	public void windowOpened(WindowEvent windowEvent) {
 
-    /**
-     * Set the location of DebugConsole, which is approximately the middle of the window.
-     */
-    private void setLocation(){
-        int x = ((owner.getWidth() - this.getWidth()) / 2) + owner.getX();
-        int y = ((owner.getHeight() - this.getHeight()) / 2) + owner.getY();
-        this.setLocation(x,y);
-    }
+	}
 
-    /**
-     * Will set DebugConsole in the middle of the window.
-     * The slider is automatically set to the value of the ball.
-     * @param windowEvent is the window's status.
-     */
-    @Override
-    public void windowActivated(WindowEvent windowEvent) {
-        setLocation();
-        Ball b = wall.ball;
-        debugPanel.setValues(b.getSpeedX(),b.getSpeedY());
-    }
+	@Override
+	public void windowClosing(WindowEvent windowEvent) {
+		gameBoard.repaint();
+	}
 
-    @Override
-    public void windowOpened(WindowEvent windowEvent) {
+	@Override
+	public void windowClosed(WindowEvent windowEvent) {
 
-    }
+	}
 
-    @Override
-    public void windowClosing(WindowEvent windowEvent) {
-        gameBoard.repaint();
-    }
+	@Override
+	public void windowIconified(WindowEvent windowEvent) {
 
-    @Override
-    public void windowClosed(WindowEvent windowEvent) {
+	}
 
-    }
+	@Override
+	public void windowDeiconified(WindowEvent windowEvent) {
 
-    @Override
-    public void windowIconified(WindowEvent windowEvent) {
+	}
 
-    }
+	@Override
+	public void windowDeactivated(WindowEvent windowEvent) {
 
-    @Override
-    public void windowDeiconified(WindowEvent windowEvent) {
-
-    }
-
-    @Override
-    public void windowDeactivated(WindowEvent windowEvent) {
-
-    }
+	}
 }

@@ -21,160 +21,157 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
- 
 /**
  * Player is an abstract class that handles the player's paddle in game.
  */
 public class Player {
 
+	public static final Color BORDER_COLOR = Color.GREEN.darker().darker();
+	public static final Color INNER_COLOR = Color.GREEN;
 
-    public static final Color BORDER_COLOR = Color.GREEN.darker().darker();
-    public static final Color INNER_COLOR = Color.GREEN;
+	private static final int DEF_MOVE_AMOUNT = 5;
 
-    private static final int DEF_MOVE_AMOUNT = 5;
+	public Rectangle playerFace;
+	private Point ballPoint;
+	private int moveAmount;
+	private int min;
+	private int max;
+	public int width = 155;
 
-    public Rectangle playerFace;
-    private Point ballPoint;
-    private int moveAmount;
-    private int min;
-    private int max;
-    public int width = 155;
+	/**
+	 * Constructor of Player class initialize and set value for ballpoint,
+	 * moveAmount, playerFace, min, max
+	 *
+	 * @param ballPoint Position of the ball (which is always the startPoint (300,
+	 *                  430))
+	 * @param height    Height of player paddle
+	 * @param container Rectangle GameFrame where game is rendered/drawn
+	 */
+	public Player(Point ballPoint, int height, Rectangle container) {
+		this.ballPoint = ballPoint;
+		moveAmount = 0;
+		playerFace = makeRectangle(width, height);
+		min = container.x + (width / 2);
+		max = min + container.width - width;
 
-    /**
-     * Constructor of Player class
-     * initialize and set value for ballpoint, moveAmount, playerFace, min, max
-     *
-     * @param ballPoint Position of the ball (which is always the startPoint (300, 430))
-     * @param height Height of player paddle
-     * @param container Rectangle GameFrame where game is rendered/drawn
-     */
-    public Player(Point ballPoint,int height,Rectangle container) {
-        this.ballPoint = ballPoint;
-        moveAmount = 0; 
-        playerFace = makeRectangle(width, height);
-        min = container.x + (width / 2);
-        max = min + container.width - width;
+	}
 
-    }
-    
-    /**
-     * Constructs a Rectangle player paddle at default location p(which is based on ballPoint),
-     * so that ball is always at the middle of player paddle when program starts
-     *
-     * @param width Width of player paddle
-     * @param height Height of player paddle
-     * @return Rectangle shaped player paddle
-     */
-    private Rectangle makeRectangle(int width,int height){
-        Point p = new Point((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
-        return  new Rectangle(p,new Dimension(width,height));
-    }
+	/**
+	 * Constructs a Rectangle player paddle at default location p(which is based on
+	 * ballPoint), so that ball is always at the middle of player paddle when
+	 * program starts
+	 *
+	 * @param width  Width of player paddle
+	 * @param height Height of player paddle
+	 * @return Rectangle shaped player paddle
+	 */
+	private Rectangle makeRectangle(int width, int height) {
+		Point p = new Point((int) (ballPoint.getX() - (width / 2)), (int) ballPoint.getY());
+		return new Rectangle(p, new Dimension(width, height));
+	}
 
-    
-    /**
-     *returns True if ball impacted player paddle (ball's downside impacted player bar)
-     * @param b ball, b
-     * @return boolean True or False
-     */
-    public boolean impact(Ball b){
-        return playerFace.contains(b.getPosition()) && playerFace.contains(b.down) ;
-    }
-    
-    
-    /**
-     * move player paddle
-     */
-    public void move(){
-        double x = ballPoint.getX() + moveAmount;
-        if(x < min || x > max)
-            return;
-        ballPoint.setLocation(x,ballPoint.getY());
-        playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
-    }
-    
-    
-    /**
-     * move player paddle to specified point P
-     * @param p specified location Point p
-     */
-    public void moveTo(Point p){
-        ballPoint.setLocation(p);
-        playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
-    }
-    
-    /**
-     * move player paddle towards left
-     */
-    public void moveLeft(){
-        moveAmount = -DEF_MOVE_AMOUNT;
-    }
-    
-    /**
-     * move player paddle towards right
-     */
-    public void movRight(){
-        moveAmount = DEF_MOVE_AMOUNT;
-    }
-    
-    /**
-     * stop player paddle.
-     */
-    public void stop(){
-        moveAmount = 0;
-    }
-    
-    
-    /**
-     * get width of player paddle.
-     * 
-     * @return width.
-     */
-    public int getWidth() {
-    	return width;
-    }
-    
-    /**
-     * set width of player paddle.
-     * 
-     * @param newWidth	Integer value for setting new width.
-     */
-    public void setWidth(int newWidth) {
-    	width += newWidth;
-    	playerFace= makeRectangle(width,10);
-    	
-    }
-    
-    /**
-     * decrease width of player paddle.
-     * 
-     * @param newWidth	Integer value for setting new width.
-     */
-    public void punishWidth(int newWidth) {
-    	width -= newWidth;
-    	playerFace = makeRectangle(width,10);
-    	
-    }
-    
-    /**
-     * reset width of player paddle.
-     * 
-     * @param newWidth	Integer value for setting new width.
-     */
-    public void resetWidth(int newWidth) {
-    	width = 155; 
-    	playerFace = makeRectangle(width,10);
-    	
-    }
+	/**
+	 * returns True if ball impacted player paddle (ball's downside impacted player
+	 * bar)
+	 * 
+	 * @param b ball, b
+	 * @return boolean True or False
+	 */
+	public boolean impact(Ball b) {
+		return playerFace.contains(b.getPosition()) && playerFace.contains(b.down);
+	}
 
-    /**
-     * getter for player paddle
-     * @return Rectangle playerFace
-     */
-    public Shape getPlayerFace(){
-        return  playerFace;
-    } 
-    
+	/**
+	 * move player paddle
+	 */
+	public void move() {
+		double x = ballPoint.getX() + moveAmount;
+		if (x < min || x > max)
+			return;
+		ballPoint.setLocation(x, ballPoint.getY());
+		playerFace.setLocation(ballPoint.x - (int) playerFace.getWidth() / 2, ballPoint.y);
+	}
 
-    
+	/**
+	 * move player paddle to specified point P
+	 * 
+	 * @param p specified location Point p
+	 */
+	public void moveTo(Point p) {
+		ballPoint.setLocation(p);
+		playerFace.setLocation(ballPoint.x - (int) playerFace.getWidth() / 2, ballPoint.y);
+	}
+
+	/**
+	 * move player paddle towards left
+	 */
+	public void moveLeft() {
+		moveAmount = -DEF_MOVE_AMOUNT;
+	}
+
+	/**
+	 * move player paddle towards right
+	 */
+	public void movRight() {
+		moveAmount = DEF_MOVE_AMOUNT;
+	}
+
+	/**
+	 * stop player paddle.
+	 */
+	public void stop() {
+		moveAmount = 0;
+	}
+
+	/**
+	 * get width of player paddle.
+	 * 
+	 * @return width.
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * set width of player paddle.
+	 * 
+	 * @param newWidth Integer value for setting new width.
+	 */
+	public void setWidth(int newWidth) {
+		width += newWidth;
+		playerFace = makeRectangle(width, 10);
+
+	}
+
+	/**
+	 * decrease width of player paddle.
+	 * 
+	 * @param newWidth Integer value for setting new width.
+	 */
+	public void punishWidth(int newWidth) {
+		width -= newWidth;
+		playerFace = makeRectangle(width, 10);
+
+	}
+
+	/**
+	 * reset width of player paddle.
+	 * 
+	 * @param newWidth Integer value for setting new width.
+	 */
+	public void resetWidth(int newWidth) {
+		width = 155;
+		playerFace = makeRectangle(width, 10);
+
+	}
+
+	/**
+	 * getter for player paddle
+	 * 
+	 * @return Rectangle playerFace
+	 */
+	public Shape getPlayerFace() {
+		return playerFace;
+	}
 
 }
